@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
-  },
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist -r https://github.com/agung42lp/DesaPoint.frontend.git"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
