@@ -118,13 +118,58 @@
         </a>
       </div>
     </section>
-    
 
     <!-- Visi Misi Section -->
 <section class="max-w-7xl mx-auto px-4 py-16">
   <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center animate-fadeInUp">Visi & Misi</h2>
   
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <!-- Text Content - Left Side -->
+    <div class="space-y-6 animate-fadeInUp" style="animation-delay: 0.2s">
+      <div>
+        <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+          <span class="w-2 h-8 bg-green-600 mr-3 rounded"></span>
+          Visi
+        </h3>
+        <p class="text-gray-700 leading-relaxed text-lg">
+          Mewujudkan RW 05 Si Doi sebagai lingkungan yang harmonis, sejahtera, dan berdaya saing dengan mengedepankan gotong royong dan transparansi dalam setiap aspek kehidupan bermasyarakat.
+        </p>
+      </div>
+      
+      <div>
+        <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+          <span class="w-2 h-8 bg-green-600 mr-3 rounded"></span>
+          Misi
+        </h3>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-start">
+            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Meningkatkan kualitas pelayanan dan transparansi administrasi warga</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Memberdayakan masyarakat melalui program-program sosial dan ekonomi</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Menciptakan lingkungan yang bersih, aman, dan nyaman untuk semua</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Membangun solidaritas dan kerukunan antar warga melalui kegiatan bersama</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <!-- Image Gallery - Right Side -->
     <div class="animate-fadeInUp" style="animation-delay: 0.4s">
       <!-- Main Large Image -->
@@ -203,53 +248,7 @@
       </div>
     </div>
   </div>
-    <!-- Text Content - Left Side -->
-    <div class="space-y-6 animate-fadeInUp" style="animation-delay: 0.2s">
-      <div>
-        <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
-          <span class="w-2 h-8 bg-green-600 mr-3 rounded"></span>
-          Visi
-        </h3>
-        <p class="text-gray-700 leading-relaxed text-lg">
-          Mewujudkan RW 05 Si Doi sebagai lingkungan yang harmonis, sejahtera, dan berdaya saing dengan mengedepankan gotong royong dan transparansi dalam setiap aspek kehidupan bermasyarakat.
-        </p>
-      </div>
-      
-      <div>
-        <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
-          <span class="w-2 h-8 bg-green-600 mr-3 rounded"></span>
-          Misi
-        </h3>
-        <ul class="space-y-3 text-gray-700">
-          <li class="flex items-start">
-            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Meningkatkan kualitas pelayanan dan transparansi administrasi warga</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Memberdayakan masyarakat melalui program-program sosial dan ekonomi</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Menciptakan lingkungan yang bersih, aman, dan nyaman untuk semua</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Membangun solidaritas dan kerukunan antar warga melalui kegiatan bersama</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    </section>
+</section>
 
     <!-- Latest News with zoom effect -->
     <section class="bg-white py-16">
