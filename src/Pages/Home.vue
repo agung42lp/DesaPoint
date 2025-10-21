@@ -84,47 +84,12 @@
       </div>
     </section>
 
-    <!-- Quick Access with ripple effect -->
-    <section class="max-w-7xl mx-auto px-4 py-16">
-      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <a 
-          v-for="(service, index) in quickServices" 
-          :key="index"
-          :href="service.href" 
-          class="group bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-500 cursor-pointer relative overflow-hidden animate-fadeInUp"
-          :style='{ animationDelay: `${(index + 4) * 0.1}s` }'>
-          <!-- Ripple effect background -->
-          <div class="absolute inset-0 bg-gradient-to-br from-green-400/0 to-green-600/0 group-hover:from-green-400/10 group-hover:to-green-600/10 transition-all duration-500"></div>
-          
-          <div class="relative flex items-start space-x-4">
-            <div :class='`p-3 rounded-lg ${service.color} transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`'>
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path v-if="index === 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
-                <path v-if="index === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
-                <path v-if="index === 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-              </svg>
-            </div>
-            <div class="flex-1">
-              <h3 class="text-lg font-bold text-gray-900 group-hover:text-green-600 transition-colors duration-300 transform group-hover:translate-x-2">
-                {{ service.title }}
-              </h3>
-              <p class="text-gray-600 text-sm mt-2 group-hover:text-gray-700 transition-colors">{{ service.desc }}</p>
-            </div>
-            <svg class="w-5 h-5 text-gray-400 group-hover:text-green-600 transform group-hover:translate-x-2 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Visi Misi Section -->
+        <!-- Visi Misi Section -->
 <section class="max-w-7xl mx-auto px-4 py-16">
   <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center animate-fadeInUp">Visi & Misi</h2>
   
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-    <!-- Text Content - Left Side -->
+    <!-- Text Content -->
     <div class="space-y-6 animate-fadeInUp" style="animation-delay: 0.2s">
       <div>
         <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
@@ -170,7 +135,7 @@
       </div>
     </div>
 
-    <!-- Image Gallery - Right Side -->
+    <!-- Image Gallery -->
     <div class="animate-fadeInUp" style="animation-delay: 0.4s">
       <!-- Main Large Image -->
       <div class="relative overflow-hidden rounded-2xl shadow-2xl mb-4 h-80 bg-gray-200 group">
@@ -249,6 +214,41 @@
     </div>
   </div>
 </section>
+
+    <!-- Quick Access with ripple effect -->
+    <section class="max-w-7xl mx-auto px-4 py-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a 
+          v-for="(service, index) in quickServices" 
+          :key="index"
+          :href="service.href" 
+          class="group bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-500 cursor-pointer relative overflow-hidden animate-fadeInUp"
+          :style='{ animationDelay: `${(index + 4) * 0.1}s` }'>
+          <!-- Ripple effect background -->
+          <div class="absolute inset-0 bg-gradient-to-br from-green-400/0 to-green-600/0 group-hover:from-green-400/10 group-hover:to-green-600/10 transition-all duration-500"></div>
+          
+          <div class="relative flex items-start space-x-4">
+            <div :class='`p-3 rounded-lg ${service.color} transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`'>
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path v-if="index === 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                <path v-if="index === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                <path v-if="index === 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold text-gray-900 group-hover:text-green-600 transition-colors duration-300 transform group-hover:translate-x-2">
+                {{ service.title }}
+              </h3>
+              <p class="text-gray-600 text-sm mt-2 group-hover:text-gray-700 transition-colors">{{ service.desc }}</p>
+            </div>
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-green-600 transform group-hover:translate-x-2 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </section>
 
     <!-- Latest News with zoom effect -->
     <section class="bg-white py-16">
@@ -335,7 +335,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const isVisible = ref(false)
 const animateNumbers = ref(false)
