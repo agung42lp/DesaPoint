@@ -232,7 +232,7 @@ const quickServices = ref([
   },
   { 
     title: 'Program RW', 
-    desc: 'Jadwal ronda, kebersihan, bank sampah',
+    desc: 'Jadwal Ronda, Jadwal Bersih-Bersih Bersama, Bank Sampah, Bakti Sosial',
     color: 'bg-green-500',
     href: '/program'
   }
