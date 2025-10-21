@@ -119,6 +119,137 @@
       </div>
     </section>
 
+    <!-- Visi Misi Section -->
+<section class="max-w-7xl mx-auto px-4 py-16">
+  <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center animate-fadeInUp">Visi & Misi</h2>
+  
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <!-- Text Content - Left Side -->
+    <div class="space-y-6 animate-fadeInUp" style="animation-delay: 0.2s">
+      <div>
+        <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+          <span class="w-2 h-8 bg-green-600 mr-3 rounded"></span>
+          Visi
+        </h3>
+        <p class="text-gray-700 leading-relaxed text-lg">
+          Mewujudkan RW 05 Si Doi sebagai lingkungan yang harmonis, sejahtera, dan berdaya saing dengan mengedepankan gotong royong dan transparansi dalam setiap aspek kehidupan bermasyarakat.
+        </p>
+      </div>
+      
+      <div>
+        <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+          <span class="w-2 h-8 bg-green-600 mr-3 rounded"></span>
+          Misi
+        </h3>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-start">
+            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Meningkatkan kualitas pelayanan dan transparansi administrasi warga</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Memberdayakan masyarakat melalui program-program sosial dan ekonomi</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Menciptakan lingkungan yang bersih, aman, dan nyaman untuk semua</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Membangun solidaritas dan kerukunan antar warga melalui kegiatan bersama</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Image Gallery - Right Side -->
+    <div class="animate-fadeInUp" style="animation-delay: 0.4s">
+      <!-- Main Large Image -->
+      <div class="relative overflow-hidden rounded-2xl shadow-2xl mb-4 h-80 bg-gray-200 group">
+        <img 
+          :src="currentMainImage" 
+          alt="Pengurus RW" 
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        <div class="absolute bottom-6 left-6 text-white">
+          <p class="text-sm font-medium mb-1">Pengurus RW 05</p>
+          <h4 class="text-xl font-bold">{{ currentImageTitle }}</h4>
+        </div>
+      </div>
+
+      <!-- Thumbnail Gallery with Navigation -->
+      <div class="relative">
+        <div class="overflow-hidden">
+          <div 
+            class="flex gap-3 transition-transform duration-500 ease-out"
+            :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+            <!-- First set of 4 -->
+            <div class="flex gap-3 min-w-full">
+              <div 
+                v-for="(img, idx) in galleryImages.slice(0, 4)" 
+                :key="idx"
+                @click="selectImage(idx)"
+                class="flex-1 h-24 rounded-lg overflow-hidden cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                :class="{ 'ring-4 ring-green-600': selectedImageIndex === idx }">
+                <img :src="img.src" :alt="img.title" class="w-full h-full object-cover">
+              </div>
+            </div>
+            
+            <!-- Second set of 4 -->
+            <div class="flex gap-3 min-w-full">
+              <div 
+                v-for="(img, idx) in galleryImages.slice(4, 8)" 
+                :key="idx + 4"
+                @click="selectImage(idx + 4)"
+                class="flex-1 h-24 rounded-lg overflow-hidden cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                :class="{ 'ring-4 ring-green-600': selectedImageIndex === idx + 4 }">
+                <img :src="img.src" :alt="img.title" class="w-full h-full object-cover">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button 
+          @click="prevSlide"
+          :disabled="currentSlide === 0"
+          class="absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed z-10">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <button 
+          @click="nextSlide"
+          :disabled="currentSlide === 1"
+          class="absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed z-10">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+
+        <!-- Slide Indicators -->
+        <div class="flex justify-center gap-2 mt-4">
+          <button 
+            v-for="n in 2" 
+            :key="n"
+            @click="currentSlide = n - 1"
+            class="w-2 h-2 rounded-full transition-all duration-300"
+            :class="currentSlide === n - 1 ? 'bg-green-600 w-8' : 'bg-gray-300'">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
     <!-- Latest News with zoom effect -->
     <section class="bg-white py-16">
       <div class="max-w-7xl mx-auto px-4">
@@ -264,6 +395,63 @@ const latestNews = ref([
     image: 'https://images.unsplash.com/photo-1582139329536-e7284fece509?w=400'
   }
 ])
+
+const currentSlide = ref(0)
+const selectedImageIndex = ref(0)
+
+const galleryImages = ref([
+  { 
+    src: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400', 
+    title: 'Ketua RW' 
+  },
+  { 
+    src: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400', 
+    title: 'Wakil Ketua' 
+  },
+  { 
+    src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400', 
+    title: 'Sekretaris' 
+  },
+  { 
+    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400', 
+    title: 'Bendahara' 
+  },
+  { 
+    src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400', 
+    title: 'Seksi Keamanan' 
+  },
+  { 
+    src: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400', 
+    title: 'Seksi Kebersihan' 
+  },
+  { 
+    src: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400', 
+    title: 'Seksi Sosial' 
+  },
+  { 
+    src: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=400', 
+    title: 'Seksi Pembangunan' 
+  }
+])
+
+const currentMainImage = computed(() => galleryImages.value[selectedImageIndex.value].src)
+const currentImageTitle = computed(() => galleryImages.value[selectedImageIndex.value].title)
+
+const selectImage = (index) => {
+  selectedImageIndex.value = index
+}
+
+const nextSlide = () => {
+  if (currentSlide.value < 1) {
+    currentSlide.value++
+  }
+}
+
+const prevSlide = () => {
+  if (currentSlide.value > 0) {
+    currentSlide.value--
+  }
+}
 
 onMounted(() => {
   isVisible.value = true
