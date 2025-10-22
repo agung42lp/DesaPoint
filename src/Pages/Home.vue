@@ -86,16 +86,9 @@
           </div>
         </div>
       </div>
-
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-          <div class="w-1 h-3 bg-white rounded-full mt-2 animate-scroll"></div>
-        </div>
-      </div>
     </section>
 
-    <!-- Stats Section with 3D Cards -->
+    <!-- Stats Section -->
     <section class="max-w-7xl mx-auto px-4 -mt-20 relative z-10">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div 
@@ -477,8 +470,8 @@ export default {
       ],
       
       stats2: [
-        { label: 'Total Pemasukan', value: 15750000, hover: false },
-        { label: 'Total Pengeluaran', value: 8420000, hover: false }
+        { label: 'Total pengeluaran', value: 15750000, hover: false },
+        { label: 'Total orang yang terbantu', value: 121, hover: false }
       ],
       
       quickServices: [
@@ -876,10 +869,6 @@ export default {
     transform: translateY(16px);
     opacity: 0;
   }
-}
-
-.animate-scroll {
-  animation: scroll 2s infinite;
 }
 
 /* Stats Cards */
