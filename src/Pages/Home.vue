@@ -1,8 +1,7 @@
-<!-- resources/js/Pages/Home.vue -->
 <template>
   <div class="min-h-screen bg-gray-50">
     
-    <!-- Navbar with slide down animation -->
+    <!-- Bagian navbar ya guys -->
     <nav class="bg-white shadow-lg sticky top-0 z-50 animate-slideDown">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
@@ -26,9 +25,8 @@
       </div>
     </nav>
 
-    <!-- Hero Section with floating elements -->
+    <!-- Bagian hero ya guys-->
     <section class="relative h-[500px] bg-gradient-to-br from-green-600 to-green-800 overflow-hidden">
-      <!-- Animated background circles -->
       <div class="absolute inset-0">
         <div class="absolute top-10 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-float"></div>
         <div class="absolute bottom-10 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float-delayed"></div>
@@ -51,7 +49,7 @@
       </div>
     </section>
 
-    <!-- Quick Stats with staggered animation -->
+    <!-- Bagian stat ya guys-->
     <section class="max-w-7xl mx-auto px-4 -mt-16">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div 
@@ -82,7 +80,7 @@
       </div>
     </section>
 
-    <!-- Quick Access with ripple effect -->
+    <!-- Bagian layanan cepat ya guys -->
     <section class="max-w-7xl mx-auto px-4 py-16">
       <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -92,7 +90,6 @@
           :href="service.href" 
           class="group bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-500 cursor-pointer relative overflow-hidden animate-fadeInUp"
           :style='{ animationDelay: `${(index + 4) * 0.1}s` }'>
-          <!-- Ripple effect background -->
           <div class="absolute inset-0 bg-gradient-to-br from-green-400/0 to-green-600/0 group-hover:from-green-400/10 group-hover:to-green-600/10 transition-all duration-500"></div>
           
           <div class="relative flex items-start space-x-4">
@@ -117,138 +114,130 @@
       </div>
     </section>
 
-    <!-- Visi Misi Section -->
-<section class="max-w-7xl mx-auto px-4 py-16">
-  <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center animate-fadeInUp">Visi & Misi</h2>
-  
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-    <!-- Text Content - Left Side -->
-    <div class="space-y-6 animate-fadeInUp" style="animation-delay: 0.2s">
-      <div>
-        <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
-          <span class="w-2 h-8 bg-green-600 mr-3 rounded"></span>
-          Visi
-        </h3>
-        <p class="text-gray-700 leading-relaxed text-lg">
-          Mewujudkan RW 05 Si Doi sebagai lingkungan yang harmonis, sejahtera, dan berdaya saing dengan mengedepankan gotong royong dan transparansi dalam setiap aspek kehidupan bermasyarakat.
-        </p>
-      </div>
+    <!-- Bagian visi misi ya guys -->
+    <section class="max-w-7xl mx-auto px-4 py-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center animate-fadeInUp">Visi & Misi</h2>
       
-      <div>
-        <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
-          <span class="w-2 h-8 bg-green-600 mr-3 rounded"></span>
-          Misi
-        </h3>
-        <ul class="space-y-3 text-gray-700">
-          <li class="flex items-start">
-            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Meningkatkan kualitas pelayanan dan transparansi administrasi warga</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Memberdayakan masyarakat melalui program-program sosial dan ekonomi</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Menciptakan lingkungan yang bersih, aman, dan nyaman untuk semua</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Membangun solidaritas dan kerukunan antar warga melalui kegiatan bersama</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Image Gallery - Right Side -->
-    <div class="animate-fadeInUp" style="animation-delay: 0.4s">
-      <!-- Main Large Image -->
-      <div class="relative overflow-hidden rounded-2xl shadow-2xl mb-4 h-80 bg-gray-200 group">
-        <img 
-          :src="currentMainImage" 
-          alt="Pengurus RW" 
-          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-        <div class="absolute bottom-6 left-6 text-white">
-          <p class="text-sm font-medium mb-1">Pengurus RW 05</p>
-          <h4 class="text-xl font-bold">{{ currentImageTitle }}</h4>
-        </div>
-      </div>
-
-      <!-- Thumbnail Gallery with Navigation -->
-      <div class="relative">
-        <div class="overflow-hidden">
-          <div 
-            class="flex gap-3 transition-transform duration-500 ease-out"
-            :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-            <!-- First set of 4 -->
-            <div class="flex gap-3 min-w-full">
-              <div 
-                v-for="(img, idx) in galleryImages.slice(0, 4)" 
-                :key="idx"
-                @click="selectImage(idx)"
-                class="flex-1 h-24 rounded-lg overflow-hidden cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                :class="{ 'ring-4 ring-green-600': selectedImageIndex === idx }">
-                <img :src="img.src" :alt="img.title" class="w-full h-full object-cover">
-              </div>
-            </div>
-            
-            <!-- Second set of 4 -->
-            <div class="flex gap-3 min-w-full">
-              <div 
-                v-for="(img, idx) in galleryImages.slice(4, 8)" 
-                :key="idx + 4"
-                @click="selectImage(idx + 4)"
-                class="flex-1 h-24 rounded-lg overflow-hidden cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                :class="{ 'ring-4 ring-green-600': selectedImageIndex === idx + 4 }">
-                <img :src="img.src" :alt="img.title" class="w-full h-full object-cover">
-              </div>
-            </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6 animate-fadeInUp" style="animation-delay: 0.2s">
+          <div>
+            <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+              <span class="w-2 h-8 bg-green-600 mr-3 rounded"></span>
+              Visi
+            </h3>
+            <p class="text-gray-700 leading-relaxed text-lg">
+              Mewujudkan RW 05 Si Doi sebagai lingkungan yang harmonis, sejahtera, dan berdaya saing dengan mengedepankan gotong royong dan transparansi dalam setiap aspek kehidupan bermasyarakat.
+            </p>
+          </div>
+          
+          <div>
+            <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+              <span class="w-2 h-8 bg-green-600 mr-3 rounded"></span>
+              Misi
+            </h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Meningkatkan kualitas pelayanan dan transparansi administrasi warga</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Memberdayakan masyarakat melalui program-program sosial dan ekonomi</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Menciptakan lingkungan yang bersih, aman, dan nyaman untuk semua</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Membangun solidaritas dan kerukunan antar warga melalui kegiatan bersama</span>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <!-- Navigation Buttons -->
-        <button 
-          @click="prevSlide"
-          :disabled="currentSlide === 0"
-          class="absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed z-10">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button 
-          @click="nextSlide"
-          :disabled="currentSlide === 1"
-          class="absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed z-10">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
+        <div class="animate-fadeInUp" style="animation-delay: 0.4s">
+          <div class="relative overflow-hidden rounded-2xl shadow-2xl mb-4 h-80 bg-gray-200 group">
+            <img 
+              :src="currentMainImage" 
+              alt="Pengurus RW" 
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 left-6 text-white">
+              <p class="text-sm font-medium mb-1">Pengurus RW 05</p>
+              <h4 class="text-xl font-bold">{{ currentImageTitle }}</h4>
+            </div>
+          </div>
 
-        <!-- Slide Indicators -->
-        <div class="flex justify-center gap-2 mt-4">
-          <button 
-            v-for="n in 2" 
-            :key="n"
-            @click="currentSlide = n - 1"
-            class="w-2 h-2 rounded-full transition-all duration-300"
-            :class="currentSlide === n - 1 ? 'bg-green-600 w-8' : 'bg-gray-300'">
-          </button>
+          <div class="relative">
+            <div class="overflow-hidden">
+              <div 
+                class="flex gap-3 transition-transform duration-500 ease-out"
+                :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+                <div class="flex gap-3 min-w-full">
+                  <div 
+                    v-for="(img, idx) in galleryImages.slice(0, 4)" 
+                    :key="idx"
+                    @click="selectImage(idx)"
+                    class="flex-1 h-24 rounded-lg overflow-hidden cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    :class="{ 'ring-4 ring-green-600': selectedImageIndex === idx }">
+                    <img :src="img.src" :alt="img.title" class="w-full h-full object-cover">
+                  </div>
+                </div>
+                
+                <div class="flex gap-3 min-w-full">
+                  <div 
+                    v-for="(img, idx) in galleryImages.slice(4, 8)" 
+                    :key="idx + 4"
+                    @click="selectImage(idx + 4)"
+                    class="flex-1 h-24 rounded-lg overflow-hidden cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    :class="{ 'ring-4 ring-green-600': selectedImageIndex === idx + 4 }">
+                    <img :src="img.src" :alt="img.title" class="w-full h-full object-cover">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button 
+              @click="prevSlide"
+              :disabled="currentSlide === 0"
+              class="absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed z-10">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <button 
+              @click="nextSlide"
+              :disabled="currentSlide === 1"
+              class="absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed z-10">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+
+            <div class="flex justify-center gap-2 mt-4">
+              <button 
+                v-for="n in 2" 
+                :key="n"
+                @click="currentSlide = n - 1"
+                class="w-2 h-2 rounded-full transition-all duration-300"
+                :class="currentSlide === n - 1 ? 'bg-green-600 w-8' : 'bg-gray-300'">
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-    <!-- Latest News with zoom effect -->
+    <!-- Bagian berita ya guys -->
     <section class="bg-white py-16">
       <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between items-center mb-8 animate-fadeInUp" style="animation-delay: 0.7s">
@@ -284,7 +273,9 @@
       </div>
     </section>
 
+    <!-- Bagian stat baksos guys -->
     <section class="max-w-5xl mx-auto px-4 -mt-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div 
           v-for="(stat, index) in stats2" 
@@ -312,15 +303,14 @@
       </div>
     </section>
 
+    <!-- Bagian tabel baksos ya guys-->
     <section class="max-w-5xl mx-auto px-4 mt-12 mb-16">
       <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-        <!-- Header -->
         <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
           <h2 class="text-2xl font-bold text-white">Riwayat Bantuan Terkini</h2>
           <p class="text-green-100 mt-1">Data penerima bantuan terbaru</p>
         </div>
 
-        <!-- Table -->
         <div class="overflow-x-auto">
           <table class="w-full">
             <thead>
@@ -366,16 +356,14 @@
           </table>
         </div>
 
-        <!-- Footer -->
         <div class="bg-gray-50 px-8 py-4 border-t border-gray-200">
           <p class="text-sm text-gray-600">Menampilkan {{ tableData.length }} data terbaru</p>
         </div>
       </div>
     </section>
 
-    <!-- Footer with wave animation -->
+    <!-- Bagian footer ya guys -->
     <footer class="bg-gray-900 text-white py-12 relative overflow-hidden">
-      <!-- Animated wave -->
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 via-green-600 to-green-400 animate-wave"></div>
       
       <div class="max-w-7xl mx-auto px-4 relative">
@@ -553,39 +541,33 @@ const tableData = ref([
     no: 1,
     nama: 'Ahmad Fauzi',
     tanggal: '20 Okt 2025',
-    keterangan: 'Selesai'
+    keterangan: 'Bantuan uang pemakaman'
   },
   {
     no: 2,
     nama: 'Siti Nurhaliza',
     tanggal: '19 Okt 2025',
-    keterangan: 'Proses'
+    keterangan: 'Bantuan uang pemakaman'
   },
   {
     no: 3,
     nama: 'Budi Santoso',
     tanggal: '18 Okt 2025',
-    keterangan: 'Selesai'
+    keterangan: 'Bantuan uang pemakaman'
   },
   {
     no: 4,
     nama: 'Dewi Kusuma',
     tanggal: '17 Okt 2025',
-    keterangan: 'Selesai'
+    keterangan: 'Bantuan uang pemakaman'
   },
   {
     no: 5,
     nama: 'Rudi Hermawan',
     tanggal: '16 Okt 2025',
-    keterangan: 'Proses'
+    keterangan: 'Bantuan uang pemakaman'
   }
 ])
-
-const getKeteranganClass = (keterangan) => {
-  return keterangan === 'Selesai' 
-    ? 'bg-green-100 text-green-700' 
-    : 'bg-yellow-100 text-yellow-700'
-}
 
 onMounted(() => {
   isVisible.value = true
