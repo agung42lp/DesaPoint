@@ -287,7 +287,7 @@
     <section class="max-w-5xl mx-auto px-4 -mt-16">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div 
-          v-for="(stat, index) in stats" 
+          v-for="(stat, index) in stats2" 
           :key="index"
           class="bg-white rounded-2xl shadow-xl p-10 hover:shadow-2xl transform hover:-translate-y-4 transition-all duration-500 cursor-pointer animate-fadeInUp"
           :style='{ animationDelay: `${index * 0.1}s` }'
@@ -433,6 +433,9 @@ const stats = ref([
   { label: 'Jumlah RT', value: 12, hover: false },
   { label: 'Program Aktif', value: 8, hover: false },
   { label: 'Pengaduan Selesai', value: 156, hover: false },
+])
+
+const stats2 = ref([
   { label: 'Total Pemasukan', value: 15750000, hover: false },
   { label: 'Total Pengeluaran', value: 8420000, hover: false }
 ])
