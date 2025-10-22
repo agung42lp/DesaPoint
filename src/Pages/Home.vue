@@ -284,6 +284,95 @@
       </div>
     </section>
 
+    <section class="max-w-5xl mx-auto px-4 -mt-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div 
+          v-for="(stat, index) in stats" 
+          :key="index"
+          class="bg-white rounded-2xl shadow-xl p-10 hover:shadow-2xl transform hover:-translate-y-4 transition-all duration-500 cursor-pointer animate-fadeInUp"
+          :style='{ animationDelay: `${index * 0.1}s` }'
+          @mouseenter="stat.hover = true"
+          @mouseleave="stat.hover = false">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-gray-600 text-lg font-medium transition-colors" :class="{ 'text-green-600': stat.hover }">{{ stat.label }}</p>
+              <p class="text-5xl font-bold text-green-700 mt-4 transition-all duration-300" :class="{ 'scale-110': stat.hover }">
+                <span v-if="animateNumbers">{{ animatedValues[index] }}</span>
+                <span v-else>0</span>
+              </p>
+            </div>
+            <div class="p-6 bg-green-100 rounded-xl transition-all duration-300" :class="{ 'bg-green-600 scale-110 rotate-12': stat.hover }">
+              <svg class="w-12 h-12 transition-colors" :class="stat.hover ? 'text-white' : 'text-green-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path v-if="index === 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                <path v-if="index === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-4 mt-12 mb-16">
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
+          <h2 class="text-2xl font-bold text-white">Riwayat Bantuan Terkini</h2>
+          <p class="text-green-100 mt-1">Data penerima bantuan terbaru</p>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="bg-gray-50 border-b-2 border-green-200">
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 w-16">No</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Nama</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Tgl Dibantu</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Keterangan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr 
+                v-for="(item, index) in tableData" 
+                :key="index"
+                class="border-b border-gray-100 hover:bg-green-50 transition-all duration-300 cursor-pointer transform hover:scale-[1.01]"
+                :class="{ 'animate-fadeInUp': true }"
+                :style="{ animationDelay: `${index * 0.1}s` }">
+                <td class="px-6 py-5 text-gray-700 font-medium">{{ item.no }}</td>
+                <td class="px-6 py-5">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                      <span class="text-green-700 font-semibold">{{ item.nama.charAt(0) }}</span>
+                    </div>
+                    <span class="text-gray-800 font-medium">{{ item.nama }}</span>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-700">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    {{ item.tanggal }}
+                  </span>
+                </td>
+                <td class="px-6 py-5">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm"
+                    :class="getKeteranganClass(item.keterangan)">
+                    {{ item.keterangan }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-gray-50 px-8 py-4 border-t border-gray-200">
+          <p class="text-sm text-gray-600">Menampilkan {{ tableData.length }} data terbaru</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer with wave animation -->
     <footer class="bg-gray-900 text-white py-12 relative overflow-hidden">
       <!-- Animated wave -->
@@ -451,6 +540,45 @@ const prevSlide = () => {
   }
 }
 
+const tableData = ref([
+  {
+    no: 1,
+    nama: 'Ahmad Fauzi',
+    tanggal: '20 Okt 2025',
+    keterangan: 'Selesai'
+  },
+  {
+    no: 2,
+    nama: 'Siti Nurhaliza',
+    tanggal: '19 Okt 2025',
+    keterangan: 'Proses'
+  },
+  {
+    no: 3,
+    nama: 'Budi Santoso',
+    tanggal: '18 Okt 2025',
+    keterangan: 'Selesai'
+  },
+  {
+    no: 4,
+    nama: 'Dewi Kusuma',
+    tanggal: '17 Okt 2025',
+    keterangan: 'Selesai'
+  },
+  {
+    no: 5,
+    nama: 'Rudi Hermawan',
+    tanggal: '16 Okt 2025',
+    keterangan: 'Proses'
+  }
+])
+
+const getKeteranganClass = (keterangan) => {
+  return keterangan === 'Selesai' 
+    ? 'bg-green-100 text-green-700' 
+    : 'bg-yellow-100 text-yellow-700'
+}
+
 onMounted(() => {
   isVisible.value = true
   
@@ -575,5 +703,21 @@ onMounted(() => {
 
 .animate-wave {
   animation: wave 3s linear infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
 }
 </style>
