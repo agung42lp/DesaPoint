@@ -297,7 +297,7 @@
             <div>
               <p class="text-gray-600 text-lg font-medium transition-colors" :class="{ 'text-green-600': stat.hover }">{{ stat.label }}</p>
               <p class="text-5xl font-bold text-green-700 mt-4 transition-all duration-300" :class="{ 'scale-110': stat.hover }">
-                <span v-if="animateNumbers">{{ animatedValues[index] }}</span>
+                <span v-if="animateNumbers2">{{ animatedValues2[index] }}</span>
                 <span v-else>0</span>
               </p>
             </div>
@@ -427,6 +427,9 @@ import { ref, computed, onMounted } from 'vue'
 const isVisible = ref(false)
 const animateNumbers = ref(false)
 const animatedValues = ref([0, 0, 0, 0])
+
+const animateNumbers2 = ref(false)
+const animatedValues2 = ref([0, 0, 0, 0])
 
 const stats = ref([
   { label: 'Total Penduduk', value: 2543, hover: false },
@@ -587,9 +590,9 @@ const getKeteranganClass = (keterangan) => {
 onMounted(() => {
   isVisible.value = true
   
-  // Animate numbers
   setTimeout(() => {
     animateNumbers.value = true
+    animateNumbers2.value = true
     stats.value.forEach((stat, idx) => {
       let current = 0
       const increment = stat.value / 50
@@ -603,16 +606,17 @@ onMounted(() => {
         }
       }, 30)
     })
+
     stats2.value.forEach((stat, idx) => {
       let current = 0
       const increment = stat.value / 50
       const timer = setInterval(() => {
         current += increment
         if (current >= stat.value) {
-          animatedValues.value[idx] = stat.value
+          animatedValues2.value[idx] = stat.value
           clearInterval(timer)
         } else {
-          animatedValues.value[idx] = Math.floor(current)
+          animatedValues2.value[idx] = Math.floor(current)
         }
       }, 30)
     })
