@@ -603,6 +603,19 @@ onMounted(() => {
         }
       }, 30)
     })
+    stats2.value.forEach((stat, idx) => {
+      let current = 0
+      const increment = stat.value / 50
+      const timer = setInterval(() => {
+        current += increment
+        if (current >= stat.value) {
+          animatedValues.value[idx] = stat.value
+          clearInterval(timer)
+        } else {
+          animatedValues.value[idx] = Math.floor(current)
+        }
+      }, 30)
+    })
   }, 500)
 })
 </script>
