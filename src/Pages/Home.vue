@@ -274,8 +274,8 @@
     </section>
 
     <!-- Bagian stat baksos guys -->
-    <section class="max-w-5xl mx-auto px-4 -mt-16">
-      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
+    <section class="max-w-5xl mx-auto px-4 py-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Program Bakti Sosial</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div 
           v-for="(stat, index) in stats2" 
