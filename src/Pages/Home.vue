@@ -432,7 +432,9 @@ const stats = ref([
   { label: 'Total Penduduk', value: 2543, hover: false },
   { label: 'Jumlah RT', value: 12, hover: false },
   { label: 'Program Aktif', value: 8, hover: false },
-  { label: 'Pengaduan Selesai', value: 156, hover: false }
+  { label: 'Pengaduan Selesai', value: 156, hover: false },
+  { label: 'Total Pemasukan', value: 15750000, hover: false },
+  { label: 'Total Pengeluaran', value: 8420000, hover: false }
 ])
 
 const quickServices = ref([
@@ -578,6 +580,38 @@ const getKeteranganClass = (keterangan) => {
     ? 'bg-green-100 text-green-700' 
     : 'bg-yellow-100 text-yellow-700'
 }
+
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0
+  }).format(value)
+}
+
+const animateValue = (index, start, end, duration) => {
+  const range = end - start
+  const increment = range / (duration / 16)
+  let current = start
+  
+  const timer = setInterval(() => {
+    current += increment
+    if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+      current = end
+      clearInterval(timer)
+    }
+    animatedValues.value[index] = formatCurrency(Math.floor(current))
+  }, 16)
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    animateNumbers.value = true
+    stats.value.forEach((stat, index) => {
+      animateValue(index, 0, stat.value, 2000)
+    })
+  }, 300)
+})
 
 onMounted(() => {
   isVisible.value = true
