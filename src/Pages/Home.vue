@@ -105,8 +105,7 @@
           :class="{ 'visible': statsVisible }"
           :style="{ animationDelay: `${index * 0.1}s` }"
           @mouseenter="stat.hover = true"
-          @mouseleave="stat.hover = false"
-          @mousemove="handleCardMove($event, index)">
+          @mouseleave="stat.hover = false">
           
           <div class="stat-card-inner" :style="cardTransforms[index]">
             <div class="stat-glow"></div>
@@ -478,7 +477,6 @@ export default {
       statsVisible: false,
       animatedValues: [0, 0, 0, 0],
       animatedValues2: [0, 0],
-      cardTransforms: [{}, {}, {}, {}],
       selectedImageIndex: 0,
       
       stats: [
@@ -605,23 +603,6 @@ export default {
       const winScroll = document.documentElement.scrollTop
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
       this.scrollProgress = (winScroll / height) * 100
-    },
-    
-    handleCardMove(event, index) {
-      const card = event.currentTarget
-      const rect = card.getBoundingClientRect()
-      const x = event.clientX - rect.left
-      const y = event.clientY - rect.top
-      
-      const centerX = rect.width / 2
-      const centerY = rect.height / 2
-      
-      const rotateX = (y - centerY) / 10
-      const rotateY = (centerX - x) / 10
-      
-      this.cardTransforms[index] = {
-        transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`
-      }
     },
     
     animateStats() {
@@ -916,7 +897,7 @@ export default {
   position: relative;
   opacity: 0;
   transform: translateY(50px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stat-card.visible {
@@ -924,15 +905,25 @@ export default {
   transform: translateY(0);
 }
 
+.stat-card:hover {
+  transform: translateY(0) scale(1.15);
+  z-index: 10;
+}
+
+.stat-card:has(~ .stat-card:hover),
+.stat-card:hover ~ .stat-card {
+  transform: translateY(0) scale(0.92);
+  opacity: 0.6;
+}
+
 .stat-card-inner {
   @apply bg-white rounded-2xl shadow-xl p-8 relative overflow-hidden;
   height: 100%;
-  transition: all 0.3s ease;
-  transform-style: preserve-3d;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stat-card:hover .stat-card-inner {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 30px 60px -12px rgba(16, 185, 129, 0.35);
 }
 
 .stat-glow {
