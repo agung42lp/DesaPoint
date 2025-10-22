@@ -581,38 +581,6 @@ const getKeteranganClass = (keterangan) => {
     : 'bg-yellow-100 text-yellow-700'
 }
 
-const formatCurrency = (value) => {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    minimumFractionDigits: 0
-  }).format(value)
-}
-
-const animateValue = (index, start, end, duration) => {
-  const range = end - start
-  const increment = range / (duration / 16)
-  let current = start
-  
-  const timer = setInterval(() => {
-    current += increment
-    if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
-      current = end
-      clearInterval(timer)
-    }
-    animatedValues.value[index] = formatCurrency(Math.floor(current))
-  }, 16)
-}
-
-onMounted(() => {
-  setTimeout(() => {
-    animateNumbers.value = true
-    stats.value.forEach((stat, index) => {
-      animateValue(index, 0, stat.value, 2000)
-    })
-  }, 300)
-})
-
 onMounted(() => {
   isVisible.value = true
   
