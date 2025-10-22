@@ -403,16 +403,6 @@
 
     <!-- Footer with Animated Wave -->
     <footer class="relative bg-gradient-to-b from-gray-900 to-black text-white py-16 overflow-hidden">
-      <svg class="footer-wave" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,58.7C960,64,1056,64,1152,58.7C1248,53,1344,43,1392,37.3L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z" fill="url(#wave-gradient)"/>
-        <defs>
-          <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style="stop-color:#10b981"/>
-            <stop offset="50%" style="stop-color:#059669"/>
-            <stop offset="100%" style="stop-color:#10b981"/>
-          </linearGradient>
-        </defs>
-      </svg>
 
       <div class="max-w-7xl mx-auto px-4 relative z-10">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -1255,21 +1245,6 @@ export default {
 }
 
 /* Footer */
-.footer-wave {
-  @apply absolute top-0 left-0 w-full;
-  height: 120px;
-  animation: wave-move 8s linear infinite;
-}
-
-@keyframes wave-move {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 .footer-section {
   transition: transform 0.3s ease;
 }
