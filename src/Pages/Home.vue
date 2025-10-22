@@ -107,7 +107,7 @@
           @mouseenter="stat.hover = true"
           @mouseleave="stat.hover = false">
           
-          <div class="stat-card-inner" :style="cardTransforms[index]">
+          <div class="stat-card-inner">
             <div class="stat-glow"></div>
             
             <div class="flex flex-col h-full">
