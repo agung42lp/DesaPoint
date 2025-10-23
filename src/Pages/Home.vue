@@ -65,23 +65,25 @@
               {{ stats[0].label }}
             </p>
             
-            <div class="flex items-center justify-between gap-4">
-              <div class="relative w-24 h-24 flex-shrink-0 transform transition-all duration-500" 
-                  :class="{ 'scale-125': stats[0].hover }">
-                <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="12"/>
-                  
-                  <circle 
-                    cx="50" 
-                    cy="50" 
-                    r="40" 
-                    fill="none" 
-                    stroke="#86efac" 
-                    stroke-width="12"
-                    :stroke-dasharray="`${femalePercentage * 2.51} 251`"
-                    stroke-dashoffset="0"
-                    class="transition-all duration-1000"
-                    :class="{ 'stroke-[14]': stats[0].hover }"/>
+            <div class="relative w-24 h-24 flex-shrink-0 transform transition-all duration-500" 
+                :class="{ 'scale-125': stats[0].hover }">
+              <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                <!-- Background circle -->
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="12"/>
+                
+                <!-- Female segment (hijau muda) dengan animasi -->
+                <circle 
+                  cx="50" 
+                  cy="50" 
+                  r="40" 
+                  fill="none" 
+                  stroke="#86efac" 
+                  stroke-width="12"
+                  :stroke-dasharray="`${animateChart ? chartFemalePercentage * 2.51 : 0} 251`"
+                  stroke-dashoffset="0"
+                  stroke-linecap="round"
+                  class="transition-all duration-1000 ease-out"
+                  :class="{ 'stroke-[14]': stats[0].hover }"/>
                   
                   <circle 
                     cx="50" 
@@ -90,9 +92,10 @@
                     fill="none" 
                     stroke="#16a34a" 
                     stroke-width="12"
-                    :stroke-dasharray="`${malePercentage * 2.51} 251`"
-                    :stroke-dashoffset="`-${femalePercentage * 2.51}`"
-                    class="transition-all duration-1000"
+                    :stroke-dasharray="`${animateChart ? chartMalePercentage * 2.51 : 0} 251`"
+                    :stroke-dashoffset="`-${animateChart ? chartFemalePercentage * 2.51 : 0}`"
+                    stroke-linecap="round"
+                    class="transition-all duration-1000 ease-out"
                     :class="{ 'stroke-[14]': stats[0].hover }"/>
                 </svg>
                 
@@ -108,24 +111,31 @@
               <div class="space-y-2 flex-1">
                 <div class="flex items-center gap-2 transform transition-all duration-300" 
                     :class="{ 'translate-x-1': stats[0].hover }">
-                  <div class="w-3 h-3 rounded-full bg-green-600"></div>
+                  <div class="w-3 h-3 rounded-full bg-green-600 transition-transform duration-500"
+                      :class="{ 'scale-125': animateChart }"></div>
                   <div class="flex-1">
                     <p class="text-xs text-gray-600">Laki-laki</p>
-                    <p class="text-sm font-bold text-gray-800">{{ genderData.male }}</p>
+                    <p class="text-sm font-bold text-gray-800">
+                      <span v-if="animateNumbers">{{ genderData.male }}</span>
+                      <span v-else>0</span>
+                    </p>
                   </div>
-                </div>
                 <div class="flex items-center gap-2 transform transition-all duration-300" 
                     :class="{ 'translate-x-1': stats[0].hover }">
-                  <div class="w-3 h-3 rounded-full bg-green-300"></div>
+                  <div class="w-3 h-3 rounded-full bg-green-300 transition-transform duration-500"
+                      :class="{ 'scale-125': animateChart }"></div>
                   <div class="flex-1">
                     <p class="text-xs text-gray-600">Perempuan</p>
-                    <p class="text-sm font-bold text-gray-800">{{ genderData.female }}</p>
+                    <p class="text-sm font-bold text-gray-800">
+                      <span v-if="animateNumbers">{{ genderData.female }}</span>
+                      <span v-else>0</span>
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
+      </div>
 
         <div 
           v-for="(stat, index) in stats.slice(1)" 
@@ -350,7 +360,7 @@
     </section>
 
     <!-- Bagian stat baksos guys -->
-    <section class="max-w-5xl mx-auto px-4 -mt-16 scroll-animate">
+    <section class="max-w-5xl mx-auto px-4 mt-16 scroll-animate">
       <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div 
@@ -495,6 +505,10 @@ const animatedValues = ref([0, 0, 0, 0])
 
 const animateNumbers2 = ref(false)
 const animatedValues2 = ref([0, 0, 0, 0])
+
+const animateChart = ref(false)
+const chartMalePercentage = ref(0)
+const chartFemalePercentage = ref(0)
 
 const setupScrollAnimations = () => {
   const options = {
@@ -686,9 +700,31 @@ onMounted(() => {
   setTimeout(() => {
     animateNumbers.value = true
     animateNumbers2.value = true
+    animateChart.value = true
     setTimeout(() => {
       scrollObserver = setupScrollAnimations()
     }, 100)
+
+    let currentMale = 0
+    let currentFemale = 0
+    const targetMale = parseFloat(malePercentage.value)
+    const targetFemale = parseFloat(femalePercentage.value)
+    const incrementMale = targetMale / 50
+    const incrementFemale = targetFemale / 50
+    
+    const chartTimer = setInterval(() => {
+      currentMale += incrementMale
+      currentFemale += incrementFemale
+      
+      if (currentMale >= targetMale) {
+        chartMalePercentage.value = targetMale
+        chartFemalePercentage.value = targetFemale
+        clearInterval(chartTimer)
+      } else {
+        chartMalePercentage.value = currentMale
+        chartFemalePercentage.value = currentFemale
+      }
+    }, 30)
 
     stats.value.forEach((stat, idx) => {
       let current = 0
@@ -892,5 +928,18 @@ section.scroll-animate > div {
 .animate-fadeInUp {
   animation: fadeInUp 0.8s ease-out forwards;
   opacity: 0;
+}
+
+@keyframes chartPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.scroll-animate.animate-visible svg circle {
+  animation: chartPulse 0.5s ease-out;
 }
 </style>
