@@ -347,7 +347,7 @@
                 </td>
                 <td class="px-6 py-5">
                   <span class="inline-flex items-center px-3 py-1 rounded-full text-sm"
-                    :class="getKeteranganClass(item.keterangan)">
+                    :class="item.keterangan">
                     {{ item.keterangan }}
                   </span>
                 </td>
