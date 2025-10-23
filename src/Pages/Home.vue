@@ -50,7 +50,7 @@
     </section>
 
     <!-- Bagian stat ya guys-->
-<section class="max-w-7xl mx-auto px-4 -mt-16 mb-8">
+<section class="max-w-7xl mx-auto px-4 -mt-16 mb-8 scroll-animate">
   <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
     <!-- Stat card pertama dengan chart donut -->
     <div 
@@ -167,7 +167,7 @@
 </section>
 
     <!-- Bagian layanan cepat ya guys -->
-    <section class="max-w-7xl mx-auto px-4 py-16 mt-8">
+    <section class="max-w-7xl mx-auto px-4 py-16 mt-8 scroll-animate">
       <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <a 
@@ -201,7 +201,7 @@
     </section>
 
     <!-- Bagian visi misi ya guys -->
-    <section class="max-w-7xl mx-auto px-4 py-16">
+    <section class="max-w-7xl mx-auto px-4 py-16 mt-8 scroll-animate">
       <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center animate-fadeInUp">Visi & Misi</h2>
       
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -324,7 +324,7 @@
     </section>
 
     <!-- Bagian berita ya guys -->
-    <section class="bg-white py-16">
+    <section class="bg-white py-16 scroll-animate">
       <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between items-center mb-8 animate-fadeInUp" style="animation-delay: 0.7s">
           <h2 class="text-3xl font-bold text-gray-900">Berita & Pengumuman</h2>
@@ -360,7 +360,7 @@
     </section>
 
     <!-- Bagian stat baksos guys -->
-    <section class="max-w-5xl mx-auto px-4 -mt-16">
+    <section class="max-w-5xl mx-auto px-4 -mt-16 scroll-animate">
       <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div 
@@ -390,7 +390,7 @@
     </section>
 
     <!-- Bagian tabel baksos ya guys-->
-    <section class="max-w-5xl mx-auto px-4 mt-12 mb-16">
+    <section class="max-w-5xl mx-auto px-4 mt-12 mb-16 scroll-animate">
       <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
         <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
           <h2 class="text-2xl font-bold text-white">Riwayat Bantuan Terkini</h2>
@@ -496,14 +496,40 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
+const observedElements = ref([])
 const isVisible = ref(false)
 const animateNumbers = ref(false)
 const animatedValues = ref([0, 0, 0, 0])
 
 const animateNumbers2 = ref(false)
 const animatedValues2 = ref([0, 0, 0, 0])
+
+const setupScrollAnimations = () => {
+  const options = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-visible')
+      }
+    })
+  }, options)
+
+  const elements = document.querySelectorAll('.scroll-animate')
+  elements.forEach(el => {
+    observer.observe(el)
+    observedElements.value.push(el)
+  })
+
+  return observer
+}
+
+let scrollObserver = null
 
 const stats = ref([
   { label: 'Total Penduduk', value: 2543, hover: false },
@@ -670,6 +696,10 @@ onMounted(() => {
   setTimeout(() => {
     animateNumbers.value = true
     animateNumbers2.value = true
+    setTimeout(() => {
+      scrollObserver = setupScrollAnimations()
+    }, 100)
+
     stats.value.forEach((stat, idx) => {
       let current = 0
       const increment = stat.value / 50
@@ -698,6 +728,14 @@ onMounted(() => {
       }, 30)
     })
   }, 500)
+})
+
+onUnmounted(() => {
+  if (scrollObserver) {
+    observedElements.value.forEach(el => {
+      scrollObserver.unobserve(el)
+    })
+  }
 })
 </script>
 
@@ -817,6 +855,57 @@ onMounted(() => {
 
 .animate-fadeInUp {
   animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Scroll animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-animate.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variasi animasi untuk elemen berbeda */
+.scroll-animate:nth-child(even) {
+  transform: translateY(50px) translateX(-20px);
+}
+
+.scroll-animate.animate-visible:nth-child(even) {
+  transform: translateY(0) translateX(0);
+}
+
+/* Animasi lebih dramatis untuk stats */
+section.scroll-animate > div {
+  transition-delay: 0.2s;
+}
+
+/* Card individual delays */
+.scroll-animate .grid > * {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-animate.animate-visible .grid > * {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-animate.animate-visible .grid > *:nth-child(1) { transition-delay: 0.1s; }
+.scroll-animate.animate-visible .grid > *:nth-child(2) { transition-delay: 0.2s; }
+.scroll-animate.animate-visible .grid > *:nth-child(3) { transition-delay: 0.3s; }
+.scroll-animate.animate-visible .grid > *:nth-child(4) { transition-delay: 0.4s; }
+.scroll-animate.animate-visible .grid > *:nth-child(5) { transition-delay: 0.5s; }
+.scroll-animate.animate-visible .grid > *:nth-child(6) { transition-delay: 0.6s; }
+
+/* Hero section tetap langsung muncul */
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
   opacity: 0;
 }
 </style>
