@@ -52,39 +52,45 @@
     <!-- Bagian stat ya guys-->
     <section class="max-w-7xl mx-auto px-4 -mt-16 mb-8 scroll-animate">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <!-- Stat card pertama dengan chart donut -->
         <div 
           class="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp relative overflow-hidden group"
           style="animation-delay: 0s"
           @mouseenter="stats[0].hover = true"
           @mouseleave="stats[0].hover = false">
           
-          <div class="absolute inset-0 bg-gradient-to-br from-pink-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <!-- Background effect saat hover -->
+          <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div class="relative">
             <p class="text-gray-600 text-sm font-medium transition-colors mb-4" :class="{ 'text-green-600': stats[0].hover }">
               {{ stats[0].label }}
             </p>
             
-            <div class="relative w-24 h-24 flex-shrink-0 transform transition-all duration-500" 
-                :class="{ 'scale-125': stats[0].hover }">
-              <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-                <!-- Background circle -->
-                <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="12"/>
-                
-                <!-- Female segment (hijau muda) dengan animasi -->
-                <circle 
-                  cx="50" 
-                  cy="50" 
-                  r="40" 
-                  fill="none" 
-                  stroke="#86efac" 
-                  stroke-width="12"
-                  :stroke-dasharray="`${animateChart ? chartFemalePercentage * 2.51 : 0} 251`"
-                  stroke-dashoffset="0"
-                  stroke-linecap="round"
-                  class="transition-all duration-1000 ease-out"
-                  :class="{ 'stroke-[14]': stats[0].hover }"/>
+            <!-- Container untuk chart dan legend -->
+            <div class="flex items-center justify-between gap-4">
+              <!-- Donut Chart -->
+              <div class="relative w-24 h-24 flex-shrink-0 transform transition-all duration-500" 
+                  :class="{ 'scale-125': stats[0].hover }">
+                <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                  <!-- Background circle -->
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="12"/>
                   
+                  <!-- Female segment (hijau muda) dengan animasi -->
+                  <circle 
+                    cx="50" 
+                    cy="50" 
+                    r="40" 
+                    fill="none" 
+                    stroke="#86efac" 
+                    stroke-width="12"
+                    :stroke-dasharray="`${animateChart ? chartFemalePercentage * 2.51 : 0} 251`"
+                    stroke-dashoffset="0"
+                    stroke-linecap="round"
+                    class="transition-all duration-1000 ease-out"
+                    :class="{ 'stroke-[14]': stats[0].hover }"/>
+                  
+                  <!-- Male segment (hijau tua) dengan animasi -->
                   <circle 
                     cx="50" 
                     cy="50" 
@@ -99,6 +105,7 @@
                     :class="{ 'stroke-[14]': stats[0].hover }"/>
                 </svg>
                 
+                <!-- Center number -->
                 <div class="absolute inset-0 flex items-center justify-center">
                   <span class="text-2xl font-bold text-green-700 transition-all duration-300" 
                         :class="{ 'scale-110': stats[0].hover }">
@@ -108,6 +115,7 @@
                 </div>
               </div>
               
+              <!-- Legend -->
               <div class="space-y-2 flex-1">
                 <div class="flex items-center gap-2 transform transition-all duration-300" 
                     :class="{ 'translate-x-1': stats[0].hover }">
@@ -120,6 +128,7 @@
                       <span v-else>0</span>
                     </p>
                   </div>
+                </div>
                 <div class="flex items-center gap-2 transform transition-all duration-300" 
                     :class="{ 'translate-x-1': stats[0].hover }">
                   <div class="w-3 h-3 rounded-full bg-green-300 transition-transform duration-500"
@@ -133,10 +142,11 @@
                   </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
-      </div>
 
+        <!-- Stat cards lainnya (2-4) -->
         <div 
           v-for="(stat, index) in stats.slice(1)" 
           :key="index + 1"
