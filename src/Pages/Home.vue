@@ -50,38 +50,124 @@
     </section>
 
     <!-- Bagian stat ya guys-->
-    <section class="max-w-7xl mx-auto px-4 -mt-16">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div 
-          v-for="(stat, index) in stats" 
-          :key="index"
-          class="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transform hover:-translate-y-4 transition-all duration-500 cursor-pointer animate-fadeInUp"
-          :style='{ animationDelay: `${index * 0.1}s` }'
-          @mouseenter="stat.hover = true"
-          @mouseleave="stat.hover = false">
-          <div class="flex items-center justify-between">
-            <div>
-              <p class="text-gray-600 text-sm font-medium transition-colors" :class="{ 'text-green-600': stat.hover }">{{ stat.label }}</p>
-              <p class="text-3xl font-bold text-green-700 mt-2 transition-all duration-300" :class="{ 'scale-110': stat.hover }">
-                <span v-if="animateNumbers">{{ animatedValues[index] }}</span>
+<section class="max-w-7xl mx-auto px-4 -mt-16 mb-8">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <!-- Stat card pertama dengan chart donut -->
+    <div 
+      class="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp relative overflow-hidden group"
+      style="animation-delay: 0s"
+      @mouseenter="stats[0].hover = true"
+      @mouseleave="stats[0].hover = false">
+      
+      <!-- Background effect saat hover -->
+      <div class="absolute inset-0 bg-gradient-to-br from-pink-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      
+      <div class="relative">
+        <p class="text-gray-600 text-sm font-medium transition-colors mb-4" :class="{ 'text-green-600': stats[0].hover }">
+          {{ stats[0].label }}
+        </p>
+        
+        <!-- Container untuk chart dan legend -->
+        <div class="flex items-center justify-between gap-4">
+          <!-- Donut Chart -->
+          <div class="relative w-24 h-24 flex-shrink-0 transform transition-all duration-500" 
+               :class="{ 'scale-125': stats[0].hover }">
+            <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+              <!-- Background circle -->
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="12"/>
+              
+              <!-- Female segment (pink) -->
+              <circle 
+                cx="50" 
+                cy="50" 
+                r="40" 
+                fill="none" 
+                stroke="#ec4899" 
+                stroke-width="12"
+                :stroke-dasharray="`${femalePercentage * 2.51} 251`"
+                stroke-dashoffset="0"
+                class="transition-all duration-1000"
+                :class="{ 'stroke-[14]': stats[0].hover }"/>
+              
+              <!-- Male segment (blue) -->
+              <circle 
+                cx="50" 
+                cy="50" 
+                r="40" 
+                fill="none" 
+                stroke="#3b82f6" 
+                stroke-width="12"
+                :stroke-dasharray="`${malePercentage * 2.51} 251`"
+                :stroke-dashoffset="`-${femalePercentage * 2.51}`"
+                class="transition-all duration-1000"
+                :class="{ 'stroke-[14]': stats[0].hover }"/>
+            </svg>
+            
+            <!-- Center number -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="text-2xl font-bold text-green-700 transition-all duration-300" 
+                    :class="{ 'scale-110': stats[0].hover }">
+                <span v-if="animateNumbers">{{ animatedValues[0] }}</span>
                 <span v-else>0</span>
-              </p>
+              </span>
             </div>
-            <div class="p-4 bg-green-100 rounded-xl transition-all duration-300" :class="{ 'bg-green-600 scale-110 rotate-12': stat.hover }">
-              <svg class="w-8 h-8 transition-colors" :class="stat.hover ? 'text-white' : 'text-green-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path v-if="index === 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                <path v-if="index === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                <path v-if="index === 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                <path v-if="index === 3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
+          </div>
+          
+          <!-- Legend -->
+          <div class="space-y-2 flex-1">
+            <div class="flex items-center gap-2 transform transition-all duration-300" 
+                 :class="{ 'translate-x-1': stats[0].hover }">
+              <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+              <div class="flex-1">
+                <p class="text-xs text-gray-600">Laki-laki</p>
+                <p class="text-sm font-bold text-gray-800">{{ genderData.male }}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 transform transition-all duration-300" 
+                 :class="{ 'translate-x-1': stats[0].hover }">
+              <div class="w-3 h-3 rounded-full bg-pink-500"></div>
+              <div class="flex-1">
+                <p class="text-xs text-gray-600">Perempuan</p>
+                <p class="text-sm font-bold text-gray-800">{{ genderData.female }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Stat cards lainnya (2-4) -->
+    <div 
+      v-for="(stat, index) in stats.slice(1)" 
+      :key="index + 1"
+      class="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp hover:scale-105 hover:z-10"
+      :style='{ animationDelay: `${(index + 1) * 0.1}s` }'
+      @mouseenter="stat.hover = true"
+      @mouseleave="stat.hover = false">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-600 text-sm font-medium transition-colors" :class="{ 'text-green-600': stat.hover }">
+            {{ stat.label }}
+          </p>
+          <p class="text-3xl font-bold text-green-700 mt-2 transition-all duration-300" :class="{ 'scale-110': stat.hover }">
+            <span v-if="animateNumbers">{{ animatedValues[index + 1] }}</span>
+            <span v-else>0</span>
+          </p>
+        </div>
+        <div class="p-4 bg-green-100 rounded-xl transition-all duration-300" :class="{ 'bg-green-600 scale-110 rotate-12': stat.hover }">
+          <svg class="w-8 h-8 transition-colors" :class="stat.hover ? 'text-white' : 'text-green-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path v-if="index === 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            <path v-if="index === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            <path v-if="index === 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- Bagian layanan cepat ya guys -->
-    <section class="max-w-7xl mx-auto px-4 py-16">
+    <section class="max-w-7xl mx-auto px-4 py-16 mt-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <a 
@@ -425,6 +511,15 @@ const stats = ref([
   { label: 'Program Aktif', value: 8, hover: false },
   { label: 'Pengaduan Selesai', value: 156, hover: false },
 ])
+
+const genderData = ref({
+  male: 1320,
+  female: 1223,
+  total: 2543
+})
+
+const malePercentage = computed(() => ((genderData.value.male / genderData.value.total) * 100).toFixed(1))
+const femalePercentage = computed(() => ((genderData.value.female / genderData.value.total) * 100).toFixed(1))
 
 const stats2 = ref([
   { label: 'Total Pemasukan', value: 15750000, hover: false },
