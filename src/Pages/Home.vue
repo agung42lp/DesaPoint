@@ -370,7 +370,7 @@
 
     <!-- Bagian stat baksos guys -->
     <section class="max-w-5xl mx-auto px-4 mt-16 scroll-animate">
-      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Program Bakti Sosial</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div 
           v-for="(stat, index) in stats2" 
@@ -459,7 +459,7 @@
 
     <!-- Bagian stat bank sampah guys -->
     <section class="max-w-5xl mx-auto px-4 mt-16 scroll-animate">
-      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Program Bank Sampah</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div 
           v-for="(stat, index) in stats3" 
@@ -491,8 +491,8 @@
     <section class="max-w-5xl mx-auto px-4 mt-12 mb-16 scroll-animate">
       <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
         <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
-          <h2 class="text-2xl font-bold text-white">Riwayat Bantuan Terkini</h2>
-          <p class="text-green-100 mt-1">Data penerima bantuan terbaru</p>
+          <h2 class="text-2xl font-bold text-white">Rekening Bank Sampah</h2>
+          <p class="text-green-100 mt-1">Data rekening bank sampah warga</p>
         </div>
 
         <div class="overflow-x-auto">
@@ -501,13 +501,13 @@
               <tr class="bg-gray-50 border-b-2 border-green-200">
                 <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 w-16">No</th>
                 <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Nama</th>
-                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Tgl Dibantu</th>
-                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Keterangan</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Total Sampah</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Total Uang</th>
               </tr>
             </thead>
             <tbody>
               <tr 
-                v-for="(item, index) in tableData" 
+                v-for="(item, index) in tableData2" 
                 :key="index"
                 class="border-b border-gray-100 hover:bg-green-50 transition-all duration-300 cursor-pointer transform hover:scale-[1.01]"
                 :class="{ 'animate-fadeInUp': true }"
@@ -800,12 +800,46 @@ const tableData = ref([
   }
 ])
 
+const tableData2 = ref([
+  {
+    no: 1,
+    nama: 'Ahmad Fauzi',
+    tanggal: '20 Okt 2025',
+    keterangan: 'Bantuan uang pemakaman'
+  },
+  {
+    no: 2,
+    nama: 'Siti Nurhaliza',
+    tanggal: '19 Okt 2025',
+    keterangan: 'Bantuan uang pemakaman'
+  },
+  {
+    no: 3,
+    nama: 'Budi Santoso',
+    tanggal: '18 Okt 2025',
+    keterangan: 'Bantuan uang pemakaman'
+  },
+  {
+    no: 4,
+    nama: 'Dewi Kusuma',
+    tanggal: '17 Okt 2025',
+    keterangan: 'Bantuan uang pemakaman'
+  },
+  {
+    no: 5,
+    nama: 'Rudi Hermawan',
+    tanggal: '16 Okt 2025',
+    keterangan: 'Bantuan uang pemakaman'
+  }
+])
+
 onMounted(() => {
   isVisible.value = true
   
   setTimeout(() => {
     animateNumbers.value = true
     animateNumbers2.value = true
+    animateNumbers3.value = true
     animateChart.value = true
     setTimeout(() => {
       scrollObserver = setupScrollAnimations()
