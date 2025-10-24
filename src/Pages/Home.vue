@@ -458,22 +458,22 @@
     </section>
 
     <!-- Bagian Program Kebersihan -->
-    <section class="max-w-7xl mx-auto px-4 py-16 mt-8 scroll-animate">
+    <section class="max-w-6xl mx-auto px-4 py-16 mt-8 scroll-animate">
       <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Program Kebersihan</h2>
       
-      <div class="relative max-w-4xl mx-auto">
+      <div class="relative">
         <!-- Navigation Arrows -->
         <button 
           @click="prevCleaningSlide"
           :disabled="currentCleaningSlide === 0"
-          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 w-20 h-96 bg-white rounded-full shadow-xl flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
-          <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          class="absolute -left-16 top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
+          <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
         </button>
 
         <!-- Card Container -->
-        <div class="overflow-hidden rounded-3xl shadow-2xl">
+        <div class="overflow-hidden rounded-2xl shadow-xl">
           <div 
             class="flex transition-transform duration-500 ease-out"
             :style="{ transform: `translateX(-${currentCleaningSlide * 100}%)` }">
@@ -484,44 +484,59 @@
               class="min-w-full">
               
               <!-- Foto -->
-              <div class="relative h-96 overflow-hidden">
+              <div class="relative h-64 overflow-hidden">
                 <img 
                   :src="event.image" 
                   :alt="event.title" 
                   class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/30"></div>
                 
-                <!-- Label di foto -->
-                <div class="absolute top-6 left-6">
-                  <span class="text-white/80 text-lg font-medium">{{ event.label }}</span>
+                <!-- Label -->
+                <div class="absolute top-4 left-4">
+                  <span class="text-white/90 text-sm font-medium">{{ event.label }}</span>
                 </div>
               </div>
 
               <!-- Info Card -->
-              <div class="bg-white p-8">
+              <div class="bg-white p-6">
                 <div class="flex items-start justify-between">
                   <div class="flex-1">
-                    <h3 class="text-3xl font-bold text-green-700 mb-6">{{ event.title }}</h3>
+                    <h3 class="text-2xl font-bold text-green-700 mb-4">{{ event.title }}</h3>
                     
-                    <div class="space-y-3">
+                    <div class="space-y-2">
                       <div>
-                        <p class="text-gray-600 text-sm font-medium mb-1">Kegiatan Dilaksanakan pada:</p>
+                        <p class="text-gray-600 text-sm mb-1">Kegiatan Dilaksanakan pada:</p>
                         <p class="text-gray-900 font-semibold">{{ event.date }}</p>
-                        <p class="text-gray-700">{{ event.time }}</p>
+                        <p class="text-gray-700 text-sm">{{ event.time }}</p>
                       </div>
                       
                       <div>
-                        <p class="text-gray-600 text-sm font-medium mb-1">Lokasi :</p>
+                        <p class="text-gray-600 text-sm mb-1">Lokasi:</p>
                         <p class="text-gray-900 font-semibold">{{ event.location }}</p>
                       </div>
                     </div>
                   </div>
 
-                  <!-- Icon Peserta -->
-                  <div class="w-24 h-24 bg-green-100 rounded-2xl flex items-center justify-center ml-6">
-                    <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                    </svg>
+                  <!-- Status Badge -->
+                  <div class="ml-6">
+                    <div 
+                      v-if="event.status === 'thisweek'"
+                      class="px-4 py-2 bg-red-500 text-white rounded-lg font-bold text-sm shadow-md transform rotate-3">
+                      Minggu Ini
+                    </div>
+                    <div 
+                      v-else-if="event.status === 'completed'"
+                      class="px-4 py-2 bg-green-500 text-white rounded-lg font-bold text-sm shadow-md flex items-center gap-2">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                      </svg>
+                      Selesai
+                    </div>
+                    <div 
+                      v-else-if="event.status === 'upcoming'"
+                      class="px-4 py-2 bg-blue-500 text-white rounded-lg font-bold text-sm shadow-md">
+                      Akan Datang
+                    </div>
                   </div>
                 </div>
               </div>
@@ -532,8 +547,8 @@
         <button 
           @click="nextCleaningSlide"
           :disabled="currentCleaningSlide === cleaningEvents.length - 1"
-          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 w-20 h-96 bg-white rounded-full shadow-xl flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
-          <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          class="absolute -right-16 top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
+          <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           </svg>
         </button>
@@ -927,7 +942,6 @@ const tableData2 = ref([
   }
 ])
 
-// Data kegiatan kebersihan
 const currentCleaningSlide = ref(0)
 const cleaningEvents = ref([
   {
@@ -936,7 +950,8 @@ const cleaningEvents = ref([
     date: 'Minggu, 26 Oktober 2025',
     time: 'jam 9 - selesai',
     location: 'Mushola At-Taqwa',
-    image: 'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800'
+    image: 'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800',
+    status: 'thisweek'
   },
   {
     label: 'Ketua RW',
@@ -944,15 +959,17 @@ const cleaningEvents = ref([
     date: 'Minggu, 2 November 2025',
     time: 'jam 9 - selesai',
     location: 'Taman RW 05',
-    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800'
+    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800',
+    status: 'upcoming'
   },
   {
     label: 'Ketua RW',
     title: 'Gotong Royong',
-    date: 'Minggu, 9 November 2025',
+    date: 'Minggu, 19 Oktober 2025',
     time: 'jam 9 - selesai',
     location: 'Jalan Utama',
-    image: 'https://images.unsplash.com/photo-1588783948922-8caa83db48b3?w=800'
+    image: 'https://images.unsplash.com/photo-1588783948922-8caa83db48b3?w=800',
+    status: 'completed'
   }
 ])
 
