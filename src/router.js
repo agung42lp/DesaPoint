@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from './Pages/Home.vue'
 import Form from './Pages/Form.vue'
 
@@ -9,7 +9,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory('/DesaPoint/'),
+  history: createWebHistory('/DesaPoint/'),
   routes
 })
 
