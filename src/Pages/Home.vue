@@ -38,12 +38,12 @@
           <h1 class="text-5xl font-extrabold mb-4">Selamat Datang di RW 05</h1>
           <p class="text-xl mb-8 text-green-100">Bersama Membangun Lingkungan yang Harmonis dan Sejahtera</p>
           <div class="flex space-x-4">
-            <a href="/pengaduan" class="px-6 py-3 bg-white text-green-700 rounded-lg font-bold hover:bg-green-50 transform hover:scale-110 hover:shadow-2xl transition-all duration-300 shadow-lg animate-bounce-slow">
+            <router-link to="/form" class="px-6 py-3 bg-white text-green-700 rounded-lg font-bold hover:bg-green-50 transform hover:scale-110 hover:shadow-2xl transition-all duration-300 shadow-lg animate-bounce-slow">
               Ajukan Pengaduan
-            </a>
-            <a href="/tentang" class="px-6 py-3 bg-green-700 text-white rounded-lg font-bold hover:bg-green-800 transform hover:scale-110 transition-all duration-300 border-2 border-white/50 hover:border-white">
+            </router-link>
+            <router-link to="/tentang" class="px-6 py-3 bg-green-700 text-white rounded-lg font-bold hover:bg-green-800 transform hover:scale-110 transition-all duration-300 border-2 border-white/50 hover:border-white">
               Tentang Kami
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
