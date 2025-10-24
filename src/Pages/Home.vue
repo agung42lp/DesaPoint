@@ -457,56 +457,96 @@
       </div>
     </section>
 
-   <!-- Bagian Program Kebersihan -->
+    <!-- Bagian Program Kebersihan -->
     <section class="max-w-7xl mx-auto px-4 py-16 mt-8 scroll-animate">
       <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Program Kebersihan</h2>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div 
-          v-for="(location, index) in cleaningLocations" 
-          :key="index"
-          @click="openScheduleModal(location)"
-          class="group cursor-pointer bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 animate-fadeInUp"
-          :style='{ animationDelay: `${index * 0.1}s` }'>
-          
-          <!-- Foto Lokasi -->
-          <div class="relative h-48 overflow-hidden">
-            <img 
-              :src="location.image" 
-              :alt="location.name" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+      <div class="relative max-w-4xl mx-auto">
+        <!-- Navigation Arrows -->
+        <button 
+          @click="prevCleaningSlide"
+          :disabled="currentCleaningSlide === 0"
+          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 w-20 h-96 bg-white rounded-full shadow-xl flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
+          <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+
+        <!-- Card Container -->
+        <div class="overflow-hidden rounded-3xl shadow-2xl">
+          <div 
+            class="flex transition-transform duration-500 ease-out"
+            :style="{ transform: `translateX(-${currentCleaningSlide * 100}%)` }">
             
-            <!-- Stempel "Minggu Ini" -->
             <div 
-              v-if="location.isThisWeek"
-              class="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg transform rotate-12 animate-pulse">
-              Minggu Ini
-            </div>
-            
-            <div class="absolute bottom-4 left-4 text-white">
-              <h3 class="text-xl font-bold">{{ location.name }}</h3>
+              v-for="(event, index) in cleaningEvents" 
+              :key="index"
+              class="min-w-full">
+              
+              <!-- Foto -->
+              <div class="relative h-96 overflow-hidden">
+                <img 
+                  :src="event.image" 
+                  :alt="event.title" 
+                  class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40"></div>
+                
+                <!-- Label di foto -->
+                <div class="absolute top-6 left-6">
+                  <span class="text-white/80 text-lg font-medium">{{ event.label }}</span>
+                </div>
+              </div>
+
+              <!-- Info Card -->
+              <div class="bg-white p-8">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <h3 class="text-3xl font-bold text-green-700 mb-6">{{ event.title }}</h3>
+                    
+                    <div class="space-y-3">
+                      <div>
+                        <p class="text-gray-600 text-sm font-medium mb-1">Kegiatan Dilaksanakan pada:</p>
+                        <p class="text-gray-900 font-semibold">{{ event.date }}</p>
+                        <p class="text-gray-700">{{ event.time }}</p>
+                      </div>
+                      
+                      <div>
+                        <p class="text-gray-600 text-sm font-medium mb-1">Lokasi :</p>
+                        <p class="text-gray-900 font-semibold">{{ event.location }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Icon Peserta -->
+                  <div class="w-24 h-24 bg-green-100 rounded-2xl flex items-center justify-center ml-6">
+                    <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          
-          <!-- Keterangan -->
-          <div class="p-6">
-            <div class="flex items-center text-gray-600 text-sm mb-3">
-              <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-              </svg>
-              <span class="font-medium">{{ location.schedule }}</span>
-            </div>
-            
-            <p class="text-gray-600 text-sm mb-4">{{ location.description }}</p>
-            
-            <div class="flex items-center text-green-600 font-medium group-hover:text-green-700">
-              <span>Lihat Jadwal</span>
-              <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </div>
-          </div>
+        </div>
+
+        <button 
+          @click="nextCleaningSlide"
+          :disabled="currentCleaningSlide === cleaningEvents.length - 1"
+          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 w-20 h-96 bg-white rounded-full shadow-xl flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
+          <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+
+        <!-- Dots Indicator -->
+        <div class="flex justify-center gap-2 mt-6">
+          <button 
+            v-for="(event, idx) in cleaningEvents" 
+            :key="idx"
+            @click="currentCleaningSlide = idx"
+            class="w-2 h-2 rounded-full transition-all duration-300"
+            :class="currentCleaningSlide === idx ? 'bg-green-600 w-8' : 'bg-gray-300'">
+          </button>
         </div>
       </div>
     </section>
@@ -644,90 +684,6 @@
       </div>
     </footer>
 
-    <!-- Modal Jadwal (tambahkan sebelum closing </div> utama) -->
-    <div 
-      v-if="showScheduleModal"
-      @click="closeScheduleModal"
-      class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 animate-fadeIn">
-      <div 
-        @click.stop
-        class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden animate-scaleIn">
-        
-        <!-- Header Modal -->
-        <div class="bg-gradient-to-r from-green-600 to-green-700 px-6 py-4 flex items-center justify-between">
-          <div>
-            <h3 class="text-2xl font-bold text-white">{{ selectedLocation?.name }}</h3>
-            <p class="text-green-100 text-sm mt-1">Jadwal Kegiatan Bersih-Bersih</p>
-          </div>
-          <button 
-            @click="closeScheduleModal"
-            class="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
-        </div>
-        
-        <!-- Content Modal -->
-        <div class="p-6 overflow-y-auto max-h-[calc(80vh-120px)]">
-          <!-- Jadwal Yang Akan Datang -->
-          <div class="mb-6">
-            <h4 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-              <span class="w-2 h-6 bg-green-600 mr-3 rounded"></span>
-              Jadwal Mendatang
-            </h4>
-            <div class="space-y-3">
-              <div 
-                v-for="(schedule, idx) in upcomingSchedules" 
-                :key="idx"
-                class="flex items-center justify-between p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-                <div class="flex items-center space-x-3">
-                  <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold">
-                    {{ schedule.day }}
-                  </div>
-                  <div>
-                    <p class="font-semibold text-gray-900">{{ schedule.date }}</p>
-                    <p class="text-sm text-gray-600">{{ schedule.time }}</p>
-                  </div>
-                </div>
-                <span 
-                  v-if="schedule.isThisWeek"
-                  class="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full">
-                  Minggu Ini
-                </span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Jadwal Sebelumnya -->
-          <div>
-            <h4 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-              <span class="w-2 h-6 bg-gray-400 mr-3 rounded"></span>
-              Jadwal Sebelumnya
-            </h4>
-            <div class="space-y-3">
-              <div 
-                v-for="(schedule, idx) in previousSchedules" 
-                :key="idx"
-                class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                <div class="flex items-center space-x-3">
-                  <div class="w-12 h-12 bg-gray-400 rounded-lg flex items-center justify-center text-white font-bold">
-                    {{ schedule.day }}
-                  </div>
-                  <div>
-                    <p class="font-semibold text-gray-700">{{ schedule.date }}</p>
-                    <p class="text-sm text-gray-500">{{ schedule.time }}</p>
-                  </div>
-                </div>
-                <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -971,57 +927,45 @@ const tableData2 = ref([
   }
 ])
 
-// Data lokasi kebersihan
-const cleaningLocations = ref([
+// Data kegiatan kebersihan
+const currentCleaningSlide = ref(0)
+const cleaningEvents = ref([
   {
-    name: 'Mushola At-Taqwa',
-    image: 'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=400',
-    schedule: 'Minggu, 26 Oktober 2025',
-    description: 'Kegiatan dilaksanakan pada jam 9 - selesai',
-    isThisWeek: true
+    label: 'Ketua RW',
+    title: 'Bumi Hijau',
+    date: 'Minggu, 26 Oktober 2025',
+    time: 'jam 9 - selesai',
+    location: 'Mushola At-Taqwa',
+    image: 'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800'
   },
   {
-    name: 'Taman RW',
-    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400',
-    schedule: 'Minggu, 2 November 2025',
-    description: 'Kegiatan dilaksanakan pada jam 9 - selesai',
-    isThisWeek: false
+    label: 'Ketua RW',
+    title: 'Bersih Taman',
+    date: 'Minggu, 2 November 2025',
+    time: 'jam 9 - selesai',
+    location: 'Taman RW 05',
+    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800'
   },
   {
-    name: 'Jalan Utama',
-    image: 'https://images.unsplash.com/photo-1588783948922-8caa83db48b3?w=400',
-    schedule: 'Minggu, 9 November 2025',
-    description: 'Kegiatan dilaksanakan pada jam 9 - selesai',
-    isThisWeek: false
+    label: 'Ketua RW',
+    title: 'Gotong Royong',
+    date: 'Minggu, 9 November 2025',
+    time: 'jam 9 - selesai',
+    location: 'Jalan Utama',
+    image: 'https://images.unsplash.com/photo-1588783948922-8caa83db48b3?w=800'
   }
 ])
 
-// Modal states
-const showScheduleModal = ref(false)
-const selectedLocation = ref(null)
-
-const upcomingSchedules = ref([
-  { day: '26', date: 'Minggu, 26 Oktober 2025', time: '09:00 - Selesai', isThisWeek: true },
-  { day: '2', date: 'Minggu, 2 November 2025', time: '09:00 - Selesai', isThisWeek: false },
-  { day: '9', date: 'Minggu, 9 November 2025', time: '09:00 - Selesai', isThisWeek: false }
-])
-
-const previousSchedules = ref([
-  { day: '19', date: 'Minggu, 19 Oktober 2025', time: '09:00 - Selesai' },
-  { day: '12', date: 'Minggu, 12 Oktober 2025', time: '09:00 - Selesai' },
-  { day: '5', date: 'Minggu, 5 Oktober 2025', time: '09:00 - Selesai' }
-])
-
-const openScheduleModal = (location) => {
-  selectedLocation.value = location
-  showScheduleModal.value = true
-  document.body.style.overflow = 'hidden'
+const nextCleaningSlide = () => {
+  if (currentCleaningSlide.value < cleaningEvents.value.length - 1) {
+    currentCleaningSlide.value++
+  }
 }
 
-const closeScheduleModal = () => {
-  showScheduleModal.value = false
-  selectedLocation.value = null
-  document.body.style.overflow = 'auto'
+const prevCleaningSlide = () => {
+  if (currentCleaningSlide.value > 0) {
+    currentCleaningSlide.value--
+  }
 }
 
 onMounted(() => {
@@ -1286,33 +1230,5 @@ section.scroll-animate > div {
 
 .scroll-animate.animate-visible svg circle {
   animation: chartPulse 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-out;
-}
-
-.animate-scaleIn {
-  animation: scaleIn 0.3s ease-out;
 }
 </style>
