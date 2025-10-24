@@ -52,14 +52,13 @@
     <!-- Bagian stat ya guys-->
     <section class="max-w-7xl mx-auto px-4 -mt-16 mb-8 scroll-animate">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <!-- Stat card pertama dengan chart donut -->
+        <!-- Stat card pertama dengan donut ya guys-->
         <div 
           class="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp relative overflow-hidden group"
           style="animation-delay: 0s"
           @mouseenter="stats[0].hover = true"
           @mouseleave="stats[0].hover = false">
-          
-          <!-- Background effect saat hover -->
+
           <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div class="relative">
@@ -67,16 +66,16 @@
               {{ stats[0].label }}
             </p>
             
-            <!-- Container untuk chart dan legend -->
+            <!-- Container untuk donut dan legend ya guys-->
             <div class="flex items-center justify-between gap-4">
-              <!-- Donut Chart -->
+              <!-- Donut ya guys -->
               <div class="relative w-24 h-24 flex-shrink-0 transform transition-all duration-500" 
                   :class="{ 'scale-125': stats[0].hover }">
                 <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-                  <!-- Background circle -->
+                  <!-- Lingkaran di bg guys -->
                   <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="12"/>
                   
-                  <!-- Female segment (hijau muda) dengan animasi -->
+                  <!-- Bagian cewek guys -->
                   <circle 
                     cx="50" 
                     cy="50" 
@@ -90,7 +89,7 @@
                     class="transition-all duration-1000 ease-out"
                     :class="{ 'stroke-[14]': stats[0].hover }"/>
                   
-                  <!-- Male segment (hijau tua) dengan animasi -->
+                  <!-- Bagian cowok guys -->
                   <circle 
                     cx="50" 
                     cy="50" 
@@ -105,7 +104,7 @@
                     :class="{ 'stroke-[14]': stats[0].hover }"/>
                 </svg>
                 
-                <!-- Center number -->
+                <!-- Angka di tengah donut guys -->
                 <div class="absolute inset-0 flex items-center justify-center">
                   <span class="text-2xl font-bold text-green-700 transition-all duration-300" 
                         :class="{ 'scale-110': stats[0].hover }">
@@ -115,7 +114,7 @@
                 </div>
               </div>
               
-              <!-- Legend -->
+              <!-- Legend ya guys -->
               <div class="space-y-2 flex-1">
                 <div class="flex items-center gap-2 transform transition-all duration-300" 
                     :class="{ 'translate-x-1': stats[0].hover }">
@@ -146,7 +145,7 @@
           </div>
         </div>
 
-        <!-- Stat cards lainnya (2-4) -->
+        <!-- Stat cards yang lain guys -->
         <div 
           v-for="(stat, index) in stats.slice(1)" 
           :key="index + 1"
@@ -458,6 +457,95 @@
       </div>
     </section>
 
+    <!-- Bagian stat bank sampah guys -->
+    <section class="max-w-5xl mx-auto px-4 mt-16 scroll-animate">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div 
+          v-for="(stat, index) in stats3" 
+          :key="index"
+          class="bg-white rounded-2xl shadow-xl p-10 hover:shadow-2xl transform hover:-translate-y-4 transition-all duration-500 cursor-pointer animate-fadeInUp"
+          :style='{ animationDelay: `${index * 0.1}s` }'
+          @mouseenter="stat.hover = true"
+          @mouseleave="stat.hover = false">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-gray-600 text-lg font-medium transition-colors" :class="{ 'text-green-600': stat.hover }">{{ stat.label }}</p>
+              <p class="text-5xl font-bold text-green-700 mt-4 transition-all duration-300" :class="{ 'scale-110': stat.hover }">
+                <span v-if="animateNumbers3">{{ animatedValues3[index] }}</span>
+                <span v-else>0</span>
+              </p>
+            </div>
+            <div class="p-6 bg-green-100 rounded-xl transition-all duration-300" :class="{ 'bg-green-600 scale-110 rotate-12': stat.hover }">
+              <svg class="w-12 h-12 transition-colors" :class="stat.hover ? 'text-white' : 'text-green-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path v-if="index === 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                <path v-if="index === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- Bagian tabel bank sampah ya guys-->
+    <section class="max-w-5xl mx-auto px-4 mt-12 mb-16 scroll-animate">
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
+          <h2 class="text-2xl font-bold text-white">Riwayat Bantuan Terkini</h2>
+          <p class="text-green-100 mt-1">Data penerima bantuan terbaru</p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="bg-gray-50 border-b-2 border-green-200">
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 w-16">No</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Nama</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Tgl Dibantu</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Keterangan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr 
+                v-for="(item, index) in tableData" 
+                :key="index"
+                class="border-b border-gray-100 hover:bg-green-50 transition-all duration-300 cursor-pointer transform hover:scale-[1.01]"
+                :class="{ 'animate-fadeInUp': true }"
+                :style="{ animationDelay: `${index * 0.1}s` }">
+                <td class="px-6 py-5 text-gray-700 font-medium">{{ item.no }}</td>
+                <td class="px-6 py-5">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                      <span class="text-green-700 font-semibold">{{ item.nama.charAt(0) }}</span>
+                    </div>
+                    <span class="text-gray-800 font-medium">{{ item.nama }}</span>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-700">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    {{ item.tanggal }}
+                  </span>
+                </td>
+                <td class="px-6 py-5">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm"
+                    :class="item.keterangan">
+                    {{ item.keterangan }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-gray-50 px-8 py-4 border-t border-gray-200">
+          <p class="text-sm text-gray-600">Menampilkan {{ tableData.length }} data terbaru</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Bagian footer ya guys -->
     <footer class="bg-gray-900 text-white py-12 relative overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 via-green-600 to-green-400 animate-wave"></div>
@@ -516,6 +604,9 @@ const animatedValues = ref([0, 0, 0, 0])
 const animateNumbers2 = ref(false)
 const animatedValues2 = ref([0, 0, 0, 0])
 
+const animateNumbers3 = ref(false)
+const animatedValues3 = ref([0, 0, 0, 0])
+
 const animateChart = ref(false)
 const chartMalePercentage = ref(0)
 const chartFemalePercentage = ref(0)
@@ -564,6 +655,11 @@ const femalePercentage = computed(() => ((genderData.value.female / genderData.v
 const stats2 = ref([
   { label: 'Total Pemasukan', value: 15750000, hover: false },
   { label: 'Total Pengeluaran', value: 8420000, hover: false }
+])
+
+const stats3 = ref([
+  { label: 'Total Sampah Terkumpul', value: 5000, hover: false },
+  { label: 'Total Pendapatan', value: 2750000, hover: false }
 ])
 
 const quickServices = ref([
@@ -751,6 +847,20 @@ onMounted(() => {
     })
 
     stats2.value.forEach((stat, idx) => {
+      let current = 0
+      const increment = stat.value / 50
+      const timer = setInterval(() => {
+        current += increment
+        if (current >= stat.value) {
+          animatedValues2.value[idx] = stat.value
+          clearInterval(timer)
+        } else {
+          animatedValues2.value[idx] = Math.floor(current)
+        }
+      }, 30)
+    })
+
+    stats3.value.forEach((stat, idx) => {
       let current = 0
       const increment = stat.value / 50
       const timer = setInterval(() => {
