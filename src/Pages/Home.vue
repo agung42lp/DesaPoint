@@ -20,6 +20,9 @@
             <router-link to="/program" class="text-gray-700 hover:text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-600 hover:after:w-full after:transition-all">Program</router-link>
             <router-link to="/keuangan" class="text-gray-700 hover:text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-600 hover:after:w-full after:transition-all">Keuangan</router-link>
             <router-link to="/form" class="text-gray-700 hover:text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-600 hover:after:w-full after:transition-all">Pengaduan</router-link>
+            <router-link to="/login" class="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg">
+              Login
+            </router-link>
           </div>
         </div>
       </div>
