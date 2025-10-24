@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-green-50 to-green-100 py-12 px-4">
     <div class="max-w-4xl mx-auto">
-      <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
-        <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
+      <div class="bg-white rounded-3xl shadow-2xl overflow-hidden animate-scale-in">
+        <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6 animate-slide-down">
           <h1 class="text-3xl font-bold text-white">Form Pengaduan Warga</h1>
           <p class="text-green-100 mt-2">Sampaikan keluhan dan aspirasi Anda</p>
         </div>
@@ -10,7 +10,7 @@
         <div class="p-8">
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             <div class="lg:col-span-2 space-y-6">
-              <div class="grid grid-cols-2 gap-4">
+              <div class="grid grid-cols-2 gap-4 animate-fade-slide-up animation-delay-200">
                 <div>
                   <label class="block text-sm font-semibold text-gray-700 mb-2">
                     Nama <span class="text-red-500">*</span>
@@ -36,7 +36,7 @@
                 </div>
               </div>
 
-              <div class="grid grid-cols-2 gap-4">
+              <div class="grid grid-cols-2 gap-4 animate-fade-slide-up animation-delay-300">
                 <div>
                   <label class="block text-sm font-semibold text-gray-700 mb-2">
                     No. HP <span class="text-red-500">*</span>
@@ -61,7 +61,7 @@
                 </div>
               </div>
 
-              <div>
+              <div class="animate-fade-slide-up animation-delay-400">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
                   Pengaduan <span class="text-red-500">*</span>
                 </label>
@@ -74,15 +74,15 @@
               </div>
             </div>
 
-            <div class="lg:col-span-1">
+            <div class="lg:col-span-1 animate-fade-slide-left animation-delay-300">
               <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Jenis Aduan <span class="text-red-500">*</span>
               </label>
               <div class="space-y-3">
                 <label 
-                  v-for="jenis in jenisAduan" 
+                  v-for="(jenis, idx) in jenisAduan" 
                   :key="jenis"
-                  class="flex items-center p-4 border-2 border-gray-300 rounded-xl cursor-pointer hover:bg-green-50 hover:border-green-500 transition-all group">
+                  :class="`flex items-center p-4 border-2 border-gray-300 rounded-xl cursor-pointer hover:bg-green-50 hover:border-green-500 transition-all group animate-fade-in animation-delay-${400 + idx * 100}`">
                   <input
                     type="radio"
                     v-model="formData.jenisAduan"
@@ -97,7 +97,7 @@
             </div>
           </div>
 
-          <div class="mb-6">
+          <div class="mb-6 animate-fade-slide-up animation-delay-600">
             <label class="block text-sm font-semibold text-gray-700 mb-2">
               Upload Foto/Dokumen Pendukung (Opsional)
             </label>
@@ -124,7 +124,7 @@
               <div 
                 v-for="(file, index) in files" 
                 :key="index"
-                class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                class="flex items-center justify-between p-3 bg-green-50 rounded-lg animate-slide-in-right">
                 <span class="text-sm text-gray-700">{{ file.name }}</span>
                 <button
                   @click="removeFile(index)"
@@ -139,7 +139,7 @@
 
           <button
             @click="handleSubmit"
-            class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl font-bold text-lg hover:from-green-700 hover:to-green-800 transform hover:scale-[1.02] transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+            class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl font-bold text-lg hover:from-green-700 hover:to-green-800 transform hover:scale-[1.02] transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 animate-fade-slide-up animation-delay-700">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
             </svg>
@@ -148,7 +148,7 @@
         </div>
       </div>
 
-      <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+      <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg animate-fade-in animation-delay-800">
         <p class="text-sm text-blue-800">
           <strong>Catatan:</strong> Pengaduan Anda akan diproses maksimal 3x24 jam. 
           Anda akan dihubungi melalui nomor HP yang terdaftar.
@@ -193,3 +193,121 @@ const handleSubmit = () => {
   alert('Pengaduan berhasil dikirim!')
 }
 </script>
+
+<style scoped>
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-slide-down {
+  animation: slideDown 0.6s ease-out 0.2s both;
+}
+
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.6s ease-out both;
+}
+
+.animate-fade-slide-left {
+  animation: fadeSlideLeft 0.6s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out both;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.4s ease-out;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-500 {
+  animation-delay: 0.5s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
+
+.animation-delay-700 {
+  animation-delay: 0.7s;
+}
+
+.animation-delay-800 {
+  animation-delay: 0.8s;
+}
+</style>
