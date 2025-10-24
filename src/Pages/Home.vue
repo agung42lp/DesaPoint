@@ -458,7 +458,7 @@
     </section>
 
     <!-- Bagian Program Kebersihan -->
-    <section class="max-w-6xl mx-auto px-4 py-16 mt-8 scroll-animate">
+    <section class="max-w-4xl mx-auto px-4 py-16 mt-8 scroll-animate">
       <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Program Kebersihan</h2>
       
       <div class="relative">
