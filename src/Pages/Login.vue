@@ -126,12 +126,11 @@
 
     <!-- Back to Home -->
     <router-link 
-      to="/"
-      class="absolute top-6 left-6 flex items-center space-x-2 text-white hover:text-green-100 transition-colors group">
-      <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    to="/"
+    class="fixed top-6 left-6 w-12 h-12 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl group z-50">
+    <svg class="w-6 h-6 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-      </svg>
-      <span class="font-medium">Back to Home</span>
+    </svg>
     </router-link>
 
   </div>
