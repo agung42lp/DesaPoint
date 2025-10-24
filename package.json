@@ -8,7 +8,7 @@
     "build": "vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist -r https://github.com/agung42lp/DesaPoint.frontend.git"
-},
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,5 +21,8 @@
     "tailwindcss": "^3.3.3",
     "vite": "^7.1.10",
     "vue": "^3.5.22"
+  },
+  "dependencies": {
+    "vue-router": "^4.6.3"
   }
 }
