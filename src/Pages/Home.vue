@@ -479,7 +479,7 @@
             :style="{ transform: `translateX(-${currentCleaningSlide * 100}%)` }">
             
             <div 
-              v-for="(event, index) in cleaningEvents" 
+              v-for="(event, index) in sortedEvents" 
               :key="index"
               class="min-w-full">
               
@@ -521,21 +521,33 @@
                   <div class="ml-6">
                     <div 
                       v-if="event.status === 'thisweek'"
-                      class="px-4 py-2 bg-red-500 text-white rounded-lg font-bold text-sm shadow-md transform rotate-3">
-                      Minggu Ini
+                      class="px-4 py-2 bg-red-500 text-white rounded-lg font-bold text-sm shadow-md transform rotate-3 animate-pulse">
+                      <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Minggu Ini</span>
+                      </div>
                     </div>
                     <div 
                       v-else-if="event.status === 'completed'"
-                      class="px-4 py-2 bg-green-500 text-white rounded-lg font-bold text-sm shadow-md flex items-center gap-2">
-                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                      </svg>
-                      Selesai
+                      class="px-4 py-2 bg-green-500 text-white rounded-lg font-bold text-sm shadow-md">
+                      <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Selesai</span>
+                      </div>
                     </div>
                     <div 
                       v-else-if="event.status === 'upcoming'"
                       class="px-4 py-2 bg-blue-500 text-white rounded-lg font-bold text-sm shadow-md">
-                      Akan Datang
+                      <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Akan Datang</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -546,7 +558,7 @@
 
         <button 
           @click="nextCleaningSlide"
-          :disabled="currentCleaningSlide === cleaningEvents.length - 1"
+          :disabled="currentCleaningSlide === sortedEvents.length - 1"
           class="absolute -right-16 top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
           <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -556,7 +568,7 @@
         <!-- Dots Indicator -->
         <div class="flex justify-center gap-2 mt-6">
           <button 
-            v-for="(event, idx) in cleaningEvents" 
+            v-for="(event, idx) in sortedEvents" 
             :key="idx"
             @click="currentCleaningSlide = idx"
             class="w-2 h-2 rounded-full transition-all duration-300"
@@ -945,7 +957,14 @@ const tableData2 = ref([
 const currentCleaningSlide = ref(0)
 const cleaningEvents = ref([
   {
-    label: 'Ketua RW',
+    title: 'Gotong Royong',
+    date: 'Minggu, 19 Oktober 2025',
+    time: 'jam 9 - selesai',
+    location: 'Jalan Utama',
+    image: 'https://images.unsplash.com/photo-1588783948922-8caa83db48b3?w=800',
+    status: 'completed'
+  },
+  {
     title: 'Bumi Hijau',
     date: 'Minggu, 26 Oktober 2025',
     time: 'jam 9 - selesai',
@@ -954,22 +973,12 @@ const cleaningEvents = ref([
     status: 'thisweek'
   },
   {
-    label: 'Ketua RW',
     title: 'Bersih Taman',
     date: 'Minggu, 2 November 2025',
     time: 'jam 9 - selesai',
     location: 'Taman RW 05',
     image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800',
     status: 'upcoming'
-  },
-  {
-    label: 'Ketua RW',
-    title: 'Gotong Royong',
-    date: 'Minggu, 19 Oktober 2025',
-    time: 'jam 9 - selesai',
-    location: 'Jalan Utama',
-    image: 'https://images.unsplash.com/photo-1588783948922-8caa83db48b3?w=800',
-    status: 'completed'
   }
 ])
 
@@ -984,6 +993,12 @@ const prevCleaningSlide = () => {
     currentCleaningSlide.value--
   }
 }
+
+const sortedEvents = computed(() => {
+  const completed = cleaningEvents.value.filter(e => e.status === 'completed')
+  const upcoming = cleaningEvents.value.filter(e => e.status !== 'completed')
+  return [...completed, ...upcoming]
+})
 
 onMounted(() => {
   isVisible.value = true
