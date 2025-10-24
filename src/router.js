@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from './Pages/Home.vue'
 import Form from './Pages/Form.vue'
-import Login from '../Pages/Login.vue'
+import Login from './Pages/Login.vue'
 
 
 const routes = [
