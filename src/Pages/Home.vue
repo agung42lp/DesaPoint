@@ -888,6 +888,10 @@ const prevSlide = () => {
   }
 }
 
+const initialSlideIndex = computed(() => {
+  return sortedEvents.value.findIndex(e => e.status === 'thisweek')
+})
+
 const tableData = ref([
   {
     no: 1,
@@ -1002,6 +1006,11 @@ const sortedEvents = computed(() => {
 
 onMounted(() => {
   isVisible.value = true
+
+  const thisWeekIndex = sortedEvents.value.findIndex(e => e.status === 'thisweek')
+  if (thisWeekIndex !== -1) {
+    currentCleaningSlide.value = thisWeekIndex
+  }
   
   setTimeout(() => {
     animateNumbers.value = true
