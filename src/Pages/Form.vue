@@ -56,7 +56,7 @@
           <div class="relative">
             <h1 class="text-4xl font-bold text-white mb-2">Form Pengaduan Warga</h1>
             <p class="text-green-50 text-lg">
-              {{ currentStep === 1 ? '📋 Lengkapi data diri Anda' : '📝 Ceritakan permasalahan yang dihadapi' }}
+              {{ currentStep === 1 ? 'Lengkapi data diri Anda' : 'Ceritakan permasalahan yang dihadapi' }}
             </p>
           </div>
         </div>
