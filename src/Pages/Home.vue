@@ -718,12 +718,6 @@
                       {{ item.totalSampah }}
                     </span>
                   </td>
-                  
-                  <td class="px-6 py-5">
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-700 font-bold">
-                      💰 {{ item.totalUang }}
-                    </span>
-                  </td>
                 </tr>
               </tbody>
             </table>
