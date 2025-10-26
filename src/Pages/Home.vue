@@ -636,7 +636,9 @@
                 class="border-b border-gray-100 hover:bg-green-50 transition-all duration-300 cursor-pointer transform hover:scale-[1.01]"
                 :class="{ 'animate-fadeInUp': true }"
                 :style="{ animationDelay: `${index * 0.1}s` }">
+                
                 <td class="px-6 py-5 text-gray-700 font-medium">{{ item.no }}</td>
+                
                 <td class="px-6 py-5">
                   <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
@@ -645,18 +647,19 @@
                     <span class="text-gray-800 font-medium">{{ item.nama }}</span>
                   </div>
                 </td>
+                
                 <td class="px-6 py-5">
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-700">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-emerald-100 text-emerald-700 font-semibold">
                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
                     </svg>
-                    {{ item.tanggal }}
+                    {{ item.totalSampah }}
                   </span>
                 </td>
+                
                 <td class="px-6 py-5">
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm"
-                    :class="item.keterangan">
-                    {{ item.keterangan }}
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-700 font-bold">
+                    💰 {{ item.totalUang }}
                   </span>
                 </td>
               </tr>
@@ -665,7 +668,7 @@
         </div>
 
         <div class="bg-gray-50 px-8 py-4 border-t border-gray-200">
-          <p class="text-sm text-gray-600">Menampilkan {{ tableData.length }} data terbaru</p>
+          <p class="text-sm text-gray-600">Menampilkan {{ tableData2.length }} rekening aktif</p>
         </div>
       </div>
     </section>
@@ -932,32 +935,32 @@ const tableData2 = ref([
   {
     no: 1,
     nama: 'Ahmad Fauzi',
-    tanggal: '20 Okt 2025',
-    keterangan: 'Bantuan uang pemakaman'
+    totalSampah: '45 Kg',
+    totalUang: 'Rp 225.000'
   },
   {
     no: 2,
     nama: 'Siti Nurhaliza',
-    tanggal: '19 Okt 2025',
-    keterangan: 'Bantuan uang pemakaman'
+    totalSampah: '38 Kg',
+    totalUang: 'Rp 190.000'
   },
   {
     no: 3,
     nama: 'Budi Santoso',
-    tanggal: '18 Okt 2025',
-    keterangan: 'Bantuan uang pemakaman'
+    totalSampah: '52 Kg',
+    totalUang: 'Rp 260.000'
   },
   {
     no: 4,
     nama: 'Dewi Kusuma',
-    tanggal: '17 Okt 2025',
-    keterangan: 'Bantuan uang pemakaman'
+    totalSampah: '41 Kg',
+    totalUang: 'Rp 205.000'
   },
   {
     no: 5,
     nama: 'Rudi Hermawan',
-    tanggal: '16 Okt 2025',
-    keterangan: 'Bantuan uang pemakaman'
+    totalSampah: '35 Kg',
+    totalUang: 'Rp 175.000'
   }
 ])
 
