@@ -1,7 +1,6 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 py-12 px-4">
     <div class="max-w-6xl mx-auto">
-      <!-- Step Indicator -->
       <div class="mb-10 animate-fade-in-down">
         <div class="flex items-center justify-center gap-4">
           <div class="flex items-center">
@@ -48,9 +47,7 @@
         </div>
       </div>
 
-      <!-- Main Content -->
       <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-green-100">
-        <!-- Header -->
         <div class="bg-gradient-to-r from-green-600 via-green-600 to-emerald-600 px-8 py-8 animate-slide-down-fade relative overflow-hidden">
           <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE0YzMuMzEzIDAgNiAyLjY4NyA2IDZzLTIuNjg3IDYtNiA2LTYtMi42ODctNi02IDIuNjg3LTYgNi02ek0yMCAzNGMzLjMxMyAwIDYgMi42ODcgNiA2cy0yLjY4NyA2LTYgNi02LTIuNjg3LTYtNiAyLjY4Ny02IDYtNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20"></div>
           <div class="relative">
@@ -61,7 +58,6 @@
           </div>
         </div>
 
-        <!-- Step 1: Data Diri -->
         <transition name="slide-fade">
           <div v-if="currentStep === 1" class="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
             <div class="p-10 space-y-6">
@@ -138,7 +134,6 @@
           </div>
         </transition>
 
-        <!-- Step 2: Detail Permasalahan -->
         <transition name="slide-fade">
           <div v-if="currentStep === 2" class="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
             <div class="p-10 space-y-6">
