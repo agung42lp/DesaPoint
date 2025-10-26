@@ -675,6 +675,7 @@
 
       <!-- Bagian tabel jadwal ronda ya guys-->
       <section class="max-w-5xl mx-auto px-4 mt-12 mb-16 scroll-animate">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Jadwal Ronda</h2>
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
           <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
             <h2 class="text-2xl font-bold text-white">Jadwal Ronda </h2>
