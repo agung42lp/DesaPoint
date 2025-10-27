@@ -1,20 +1,20 @@
 <template>
   <div class="min-h-screen bg-gray-50">
-    
-    <!-- Bagian navbar ya guys -->
+
     <nav class="bg-white shadow-lg sticky top-0 z-50 animate-slideDown">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-20">
+        <div class="flex justify-between h-16 md:h-20">
           <div class="flex items-center space-x-4">
-            <div class="h-12 w-12 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold transform hover:rotate-12 hover:scale-110 transition-all duration-300">
+            <div class="h-10 w-10 md:h-12 md:w-12 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold transform hover:rotate-12 hover:scale-110 transition-all duration-300">
               RW
             </div>
             <div>
-              <h1 class="text-xl font-bold text-green-700">RW 05 Si Doi</h1>
+              <h1 class="text-lg md:text-xl font-bold text-green-700">RW 05 Si Doi</h1>
               <p class="text-xs text-gray-600">Kelurahan Sejahtera</p>
             </div>
           </div>
           
+          <!-- Desktop Menu -->
           <div class="hidden md:flex items-center space-x-6">
             <router-link to="/" class="text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-green-600 after:scale-x-100 transition-all">Beranda</router-link>
             <router-link to="/program" class="text-gray-700 hover:text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-600 hover:after:w-full after:transition-all">Program</router-link>
@@ -24,12 +24,31 @@
               Login
             </router-link>
           </div>
+
+          <!-- Mobile Menu Button -->
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div v-if="mobileMenuOpen" class="md:hidden pb-4 border-t border-gray-100 mt-2">
+          <div class="flex flex-col space-y-3 pt-4">
+            <router-link @click="mobileMenuOpen = false" to="/" class="text-green-600 font-medium py-2">Beranda</router-link>
+            <router-link @click="mobileMenuOpen = false" to="/program" class="text-gray-700 hover:text-green-600 font-medium py-2">Program</router-link>
+            <router-link @click="mobileMenuOpen = false" to="/keuangan" class="text-gray-700 hover:text-green-600 font-medium py-2">Keuangan</router-link>
+            <router-link @click="mobileMenuOpen = false" to="/form" class="text-gray-700 hover:text-green-600 font-medium py-2">Pengaduan</router-link>
+            <router-link @click="mobileMenuOpen = false" to="/login" class="px-4 py-2 bg-green-600 text-white rounded-lg font-medium text-center">Login</router-link>
+          </div>
         </div>
       </div>
     </nav>
 
     <!-- Bagian hero ya guys-->
-    <section class="relative h-[500px] bg-gradient-to-br from-green-600 to-green-800 overflow-hidden">
+    <section class="relative h-[350px] md:h-[500px] bg-gradient-to-br from-green-600 to-green-800 overflow-hidden">
       <div class="absolute inset-0">
         <div class="absolute top-10 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-float"></div>
         <div class="absolute bottom-10 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float-delayed"></div>
@@ -38,13 +57,13 @@
 
       <div class="relative max-w-7xl mx-auto px-4 h-full flex items-center">
         <div class="text-white" :class="{ 'animate-fadeInUp': isVisible }">
-          <h1 class="text-5xl font-extrabold mb-4">Selamat Datang di RW 05</h1>
-          <p class="text-xl mb-8 text-green-100">Bersama Membangun Lingkungan yang Harmonis dan Sejahtera</p>
-          <div class="flex space-x-4">
-            <router-link to="/form" class="px-6 py-3 bg-white text-green-700 rounded-lg font-bold hover:bg-green-50 transform hover:scale-110 hover:shadow-2xl transition-all duration-300 shadow-lg animate-bounce-slow">
+          <h1 class="text-3xl md:text-5xl font-extrabold mb-3 md:mb-4">Selamat Datang di RW 05</h1>
+          <p class="text-base md:text-xl mb-6 md:mb-8 text-green-100">Bersama Membangun Lingkungan yang Harmonis dan Sejahtera</p>
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <router-link to="/form" class="px-6 py-3 bg-white text-green-700 rounded-lg font-bold hover:bg-green-50 transform hover:scale-110 hover:shadow-2xl transition-all duration-300 shadow-lg animate-bounce-slow text-center">
               Ajukan Pengaduan
             </router-link>
-            <router-link to="/tentang" class="px-6 py-3 bg-green-700 text-white rounded-lg font-bold hover:bg-green-800 transform hover:scale-110 transition-all duration-300 border-2 border-white/50 hover:border-white">
+            <router-link to="/tentang" class="px-6 py-3 bg-green-700 text-white rounded-lg font-bold hover:bg-green-800 transform hover:scale-110 transition-all duration-300 border-2 border-white/50 hover:border-white text-center">
               Tentang Kami
             </router-link>
           </div>
@@ -53,11 +72,11 @@
     </section>
 
     <!-- Bagian stat ya guys-->
-    <section class="max-w-7xl mx-auto px-4 -mt-16 mb-8 scroll-animate">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <section class="max-w-7xl mx-auto px-4 -mt-12 md:-mt-16 mb-8 scroll-animate">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
         <!-- Stat card pertama dengan donut ya guys-->
         <div 
-          class="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp relative overflow-hidden group"
+          class="bg-white rounded-xl md:rounded-2xl shadow-xl p-4 md:p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp relative overflow-hidden group"
           style="animation-delay: 0s"
           @mouseenter="stats[0].hover = true"
           @mouseleave="stats[0].hover = false">
@@ -65,20 +84,20 @@
           <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div class="relative">
-            <p class="text-gray-600 text-sm font-medium transition-colors mb-4" :class="{ 'text-green-600': stats[0].hover }">
+            <p class="text-gray-600 text-xs md:text-sm font-medium transition-colors mb-3 md:mb-4" :class="{ 'text-green-600': stats[0].hover }">
               {{ stats[0].label }}
             </p>
             
-            <!-- Container untuk donut dan legend ya guys-->
-            <div class="flex items-center justify-between gap-4">
-              <!-- Donut ya guys -->
-              <div class="relative w-24 h-24 flex-shrink-0 transform transition-all duration-500" 
+            <!-- Container untuk donut dan legend -->
+            <div class="flex items-center justify-between gap-3 md:gap-4">
+              <!-- Donut -->
+              <div class="relative w-20 h-20 md:w-24 md:h-24 flex-shrink-0 transform transition-all duration-500" 
                   :class="{ 'scale-125': stats[0].hover }">
-                <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-                  <!-- Lingkaran di bg guys -->
+                <svg class="w-20 h-20 md:w-24 md:h-24 transform -rotate-90" viewBox="0 0 100 100">
+                  <!-- Lingkaran bg -->
                   <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="12"/>
                   
-                  <!-- Bagian cewek guys -->
+                  <!-- Bagian female -->
                   <circle 
                     cx="50" 
                     cy="50" 
@@ -92,7 +111,7 @@
                     class="transition-all duration-1000 ease-out"
                     :class="{ 'stroke-[14]': stats[0].hover }"/>
                   
-                  <!-- Bagian cowok guys -->
+                  <!-- Bagian male -->
                   <circle 
                     cx="50" 
                     cy="50" 
@@ -107,9 +126,9 @@
                     :class="{ 'stroke-[14]': stats[0].hover }"/>
                 </svg>
                 
-                <!-- Angka di tengah donut guys -->
+                <!-- Angka di tengah -->
                 <div class="absolute inset-0 flex items-center justify-center">
-                  <span class="text-2xl font-bold text-green-700 transition-all duration-300" 
+                  <span class="text-xl md:text-2xl font-bold text-green-700 transition-all duration-300" 
                         :class="{ 'scale-110': stats[0].hover }">
                     <span v-if="animateNumbers">{{ animatedValues[0] }}</span>
                     <span v-else>0</span>
@@ -117,15 +136,15 @@
                 </div>
               </div>
               
-              <!-- Legend ya guys -->
-              <div class="space-y-2 flex-1">
+              <!-- Legend -->
+              <div class="space-y-1.5 md:space-y-2 flex-1">
                 <div class="flex items-center gap-2 transform transition-all duration-300" 
                     :class="{ 'translate-x-1': stats[0].hover }">
-                  <div class="w-3 h-3 rounded-full bg-green-600 transition-transform duration-500"
+                  <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-600 transition-transform duration-500"
                       :class="{ 'scale-125': animateChart }"></div>
                   <div class="flex-1">
-                    <p class="text-xs text-gray-600">Laki-laki</p>
-                    <p class="text-sm font-bold text-gray-800">
+                    <p class="text-[10px] md:text-xs text-gray-600">Laki-laki</p>
+                    <p class="text-xs md:text-sm font-bold text-gray-800">
                       <span v-if="animateNumbers">{{ genderData.male }}</span>
                       <span v-else>0</span>
                     </p>
@@ -133,11 +152,11 @@
                 </div>
                 <div class="flex items-center gap-2 transform transition-all duration-300" 
                     :class="{ 'translate-x-1': stats[0].hover }">
-                  <div class="w-3 h-3 rounded-full bg-green-300 transition-transform duration-500"
+                  <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-300 transition-transform duration-500"
                       :class="{ 'scale-125': animateChart }"></div>
                   <div class="flex-1">
-                    <p class="text-xs text-gray-600">Perempuan</p>
-                    <p class="text-sm font-bold text-gray-800">
+                    <p class="text-[10px] md:text-xs text-gray-600">Perempuan</p>
+                    <p class="text-xs md:text-sm font-bold text-gray-800">
                       <span v-if="animateNumbers">{{ genderData.female }}</span>
                       <span v-else>0</span>
                     </p>
@@ -152,22 +171,22 @@
         <div 
           v-for="(stat, index) in stats.slice(1)" 
           :key="index + 1"
-          class="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp hover:scale-105 hover:z-10"
+          class="bg-white rounded-xl md:rounded-2xl shadow-xl p-4 md:p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp hover:scale-105 hover:z-10"
           :style='{ animationDelay: `${(index + 1) * 0.1}s` }'
           @mouseenter="stat.hover = true"
           @mouseleave="stat.hover = false">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-gray-600 text-sm font-medium transition-colors" :class="{ 'text-green-600': stat.hover }">
+              <p class="text-gray-600 text-xs md:text-sm font-medium transition-colors" :class="{ 'text-green-600': stat.hover }">
                 {{ stat.label }}
               </p>
-              <p class="text-3xl font-bold text-green-700 mt-2 transition-all duration-300" :class="{ 'scale-110': stat.hover }">
+              <p class="text-2xl md:text-3xl font-bold text-green-700 mt-2 transition-all duration-300" :class="{ 'scale-110': stat.hover }">
                 <span v-if="animateNumbers">{{ animatedValues[index + 1] }}</span>
                 <span v-else>0</span>
               </p>
             </div>
-            <div class="p-4 bg-green-100 rounded-xl transition-all duration-300" :class="{ 'bg-green-600 scale-110 rotate-12': stat.hover }">
-              <svg class="w-8 h-8 transition-colors" :class="stat.hover ? 'text-white' : 'text-green-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="p-3 md:p-4 bg-green-100 rounded-xl transition-all duration-300" :class="{ 'bg-green-600 scale-110 rotate-12': stat.hover }">
+              <svg class="w-6 h-6 md:w-8 md:h-8 transition-colors" :class="stat.hover ? 'text-white' : 'text-green-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path v-if="index === 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                 <path v-if="index === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                 <path v-if="index === 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -179,8 +198,8 @@
     </section>
 
     <!-- Bagian layanan cepat ya guys -->
-    <section class="max-w-7xl mx-auto px-4 py-16 mt-8 scroll-animate">
-      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
+    <section class="max-w-7xl mx-auto px-4 py-8 md:py-16 mt-4 md:mt-8 scroll-animate">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8 text-center animate-fadeInUp">Layanan Cepat</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <a 
           v-for="(service, index) in quickServices" 
@@ -213,8 +232,8 @@
     </section>
 
     <!-- Bagian visi misi ya guys -->
-    <section class="max-w-7xl mx-auto px-4 py-16 mt-8 scroll-animate">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center animate-fadeInUp">Visi & Misi</h2>
+    <section class="max-w-7xl mx-auto px-4 py-8 md:py-16 mt-4 md:mt-8 scroll-animate">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 md:mb-12 text-center animate-fadeInUp">Visi & Misi</h2>
       
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div class="space-y-6 animate-fadeInUp" style="animation-delay: 0.2s">
@@ -293,11 +312,11 @@
                 
                 <div class="flex gap-3 min-w-full">
                   <div 
-                    v-for="(img, idx) in galleryImages.slice(4, 8)" 
-                    :key="idx + 4"
-                    @click="selectImage(idx + 4)"
-                    class="flex-1 h-24 rounded-lg overflow-hidden cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                    :class="{ 'ring-4 ring-green-600': selectedImageIndex === idx + 4 }">
+                    v-for="(img, idx) in galleryImages.slice(0, 4)" 
+                    :key="idx"
+                    @click="selectImage(idx)"
+                    class="flex-1 h-20 md:h-24 rounded-lg overflow-hidden cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    :class="{ 'ring-2 md:ring-4 ring-green-600': selectedImageIndex === idx }">
                     <img :src="img.src" :alt="img.title" class="w-full h-full object-cover">
                   </div>
                 </div>
@@ -336,10 +355,10 @@
     </section>
 
     <!-- Bagian berita ya guys -->
-    <section class="bg-white py-16 scroll-animate">
+    <section class="bg-white py-8 md:py-16 scroll-animate">
       <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between items-center mb-8 animate-fadeInUp" style="animation-delay: 0.7s">
-          <h2 class="text-3xl font-bold text-gray-900">Berita & Pengumuman</h2>
+        <div class="flex justify-between items-center mb-6 md:mb-8 animate-fadeInUp">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Berita & Pengumuman</h2>
           <a href="/berita" class="text-green-600 hover:text-green-700 font-medium group flex items-center">
             <span class="group-hover:mr-2 transition-all">Lihat Semua</span>
             <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -372,26 +391,26 @@
     </section>
 
     <!-- Bagian stat baksos guys -->
-    <section class="max-w-5xl mx-auto px-4 mt-16 scroll-animate">
-      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Program Bakti Sosial</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <section class="max-w-5xl mx-auto px-4 mt-8 md:mt-16 scroll-animate">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8 text-center animate-fadeInUp">Program Bakti Sosial</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         <div 
           v-for="(stat, index) in stats2" 
           :key="index"
-          class="bg-white rounded-2xl shadow-xl p-10 hover:shadow-2xl transform hover:-translate-y-4 transition-all duration-500 cursor-pointer animate-fadeInUp"
+          class="bg-white rounded-xl md:rounded-2xl shadow-xl p-6 md:p-10 hover:shadow-2xl transform hover:-translate-y-4 transition-all duration-500 cursor-pointer animate-fadeInUp"
           :style='{ animationDelay: `${index * 0.1}s` }'
           @mouseenter="stat.hover = true"
           @mouseleave="stat.hover = false">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-gray-600 text-lg font-medium transition-colors" :class="{ 'text-green-600': stat.hover }">{{ stat.label }}</p>
-              <p class="text-5xl font-bold text-green-700 mt-4 transition-all duration-300" :class="{ 'scale-110': stat.hover }">
+              <p class="text-sm md:text-lg text-gray-600 font-medium transition-colors" :class="{ 'text-green-600': stat.hover }">{{ stat.label }}</p>
+              <p class="text-3xl md:text-5xl font-bold text-green-700 mt-3 md:mt-4 transition-all duration-300" :class="{ 'scale-110': stat.hover }">
                 <span v-if="animateNumbers2">{{ animatedValues2[index] }}</span>
                 <span v-else>0</span>
               </p>
             </div>
-            <div class="p-6 bg-green-100 rounded-xl transition-all duration-300" :class="{ 'bg-green-600 scale-110 rotate-12': stat.hover }">
-              <svg class="w-12 h-12 transition-colors" :class="stat.hover ? 'text-white' : 'text-green-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="p-4 md:p-6 bg-green-100 rounded-xl transition-all duration-300" :class="{ 'bg-green-600 scale-110 rotate-12': stat.hover }">
+              <svg class="w-8 h-8 md:w-12 md:h-12 transition-colors" :class="stat.hover ? 'text-white' : 'text-green-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path v-if="index === 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                 <path v-if="index === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
               </svg>
@@ -402,14 +421,15 @@
     </section>
 
     <!-- Bagian tabel baksos ya guys-->
-    <section class="max-w-5xl mx-auto px-4 mt-12 mb-16 scroll-animate">
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-        <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
-          <h2 class="text-2xl font-bold text-white">Riwayat Bantuan Terkini</h2>
-          <p class="text-green-100 mt-1">Data penerima bantuan terbaru</p>
+    <section class="max-w-5xl mx-auto px-4 mt-8 md:mt-12 mb-12 md:mb-16 scroll-animate">
+      <div class="bg-white rounded-xl md:rounded-2xl shadow-xl overflow-hidden">
+        <div class="bg-gradient-to-r from-green-600 to-green-700 px-4 md:px-8 py-4 md:py-6">
+          <h2 class="text-xl md:text-2xl font-bold text-white">Riwayat Bantuan Terkini</h2>
+          <p class="text-green-100 mt-1 text-sm">Data penerima bantuan terbaru</p>
         </div>
 
-        <div class="overflow-x-auto">
+        <!-- Desktop Table -->
+        <div class="hidden md:block overflow-x-auto">
           <table class="w-full">
             <thead>
               <tr class="bg-gray-50 border-b-2 border-green-200">
@@ -444,8 +464,7 @@
                   </span>
                 </td>
                 <td class="px-6 py-5">
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm"
-                    :class="item.keterangan">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm">
                     {{ item.keterangan }}
                   </span>
                 </td>
@@ -454,23 +473,49 @@
           </table>
         </div>
 
-        <div class="bg-gray-50 px-8 py-4 border-t border-gray-200">
-          <p class="text-sm text-gray-600">Menampilkan {{ tableData.length }} data terbaru</p>
+        <!-- Mobile Cards -->
+        <div class="md:hidden divide-y divide-gray-100">
+          <div 
+            v-for="(item, index) in tableData" 
+            :key="index"
+            class="p-4 hover:bg-green-50 transition-all duration-300"
+            :class="{ 'animate-fadeInUp': true }"
+            :style="{ animationDelay: `${index * 0.1}s` }">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                <span class="text-green-700 font-semibold text-sm">{{ item.nama.charAt(0) }}</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-semibold text-gray-900 mb-1">{{ item.nama }}</div>
+                <div class="flex items-center gap-1 text-xs text-blue-700 mb-2">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  {{ item.tanggal }}
+                </div>
+                <div class="text-sm text-gray-600">{{ item.keterangan }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 px-4 md:px-8 py-3 md:py-4 border-t border-gray-200">
+          <p class="text-xs md:text-sm text-gray-600">Menampilkan {{ tableData.length }} data terbaru</p>
         </div>
       </div>
     </section>
 
     <!-- Bagian Program Kebersihan -->
-    <section class="max-w-4xl mx-auto px-4 py-16 mt-8 scroll-animate">
-      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Program Kebersihan</h2>
+    <section class="max-w-4xl mx-auto px-4 py-8 md:py-16 mt-4 md:mt-8 scroll-animate">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8 text-center animate-fadeInUp">Program Kebersihan</h2>
       
       <div class="relative">
         <!-- Navigation Arrows -->
         <button 
           @click="prevCleaningSlide"
           :disabled="currentCleaningSlide === 0"
-          class="absolute -left-16 top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
-          <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
+          <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
         </button>
@@ -487,7 +532,7 @@
               class="min-w-full">
               
               <!-- Foto -->
-              <div class="relative h-64 overflow-hidden">
+              <div class="relative h-48 md:h-64 overflow-hidden">
                 <img 
                   :src="event.image" 
                   :alt="event.title" 
@@ -501,32 +546,32 @@
               </div>
 
               <!-- Info Card -->
-              <div class="bg-white p-6">
-                <div class="flex items-start justify-between">
+              <div class="bg-white p-4 md:p-6">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                   <div class="flex-1">
-                    <h3 class="text-2xl font-bold text-green-700 mb-4">{{ event.title }}</h3>
+                    <h3 class="text-xl md:text-2xl font-bold text-green-700 mb-3 md:mb-4">{{ event.title }}</h3>
                     
                     <div class="space-y-2">
                       <div>
-                        <p class="text-gray-600 text-sm mb-1">Kegiatan Dilaksanakan pada:</p>
-                        <p class="text-gray-900 font-semibold">{{ event.date }}</p>
-                        <p class="text-gray-700 text-sm">{{ event.time }}</p>
+                        <p class="text-gray-600 text-xs md:text-sm mb-1">Kegiatan Dilaksanakan pada:</p>
+                        <p class="text-gray-900 font-semibold text-sm md:text-base">{{ event.date }}</p>
+                        <p class="text-gray-700 text-xs md:text-sm">{{ event.time }}</p>
                       </div>
                       
                       <div>
-                        <p class="text-gray-600 text-sm mb-1">Lokasi:</p>
-                        <p class="text-gray-900 font-semibold">{{ event.location }}</p>
+                        <p class="text-gray-600 text-xs md:text-sm mb-1">Lokasi:</p>
+                        <p class="text-gray-900 font-semibold text-sm md:text-base">{{ event.location }}</p>
                       </div>
                     </div>
                   </div>
 
                   <!-- Status Badge -->
-                  <div class="ml-6">
+                  <div class="flex md:ml-6 justify-end md:justify-start">
                     <div 
                       v-if="event.status === 'thisweek'"
-                      class="px-4 py-2 bg-red-500 text-white rounded-lg font-bold text-sm shadow-md transform rotate-3 animate-pulse">
-                      <div class="flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      class="px-3 py-1.5 md:px-4 md:py-2 bg-red-500 text-white rounded-lg font-bold text-xs md:text-sm shadow-md transform rotate-3 animate-pulse inline-flex">
+                      <div class="flex items-center gap-1.5 md:gap-2">
+                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 20 20">
                           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
                         </svg>
                         <span>Minggu Ini</span>
@@ -779,6 +824,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
+const mobileMenuOpen = ref(false)
 const observedElements = ref([])
 const isVisible = ref(false)
 const animateNumbers = ref(false)
