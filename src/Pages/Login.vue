@@ -1,37 +1,42 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-green-400 via-green-500 to-green-600 flex items-center justify-center p-4 relative overflow-hidden">
     
-    <!-- Decorative circles with dynamic animation -->
+    <!-- Decorative circles - simplified animation -->
     <div 
-      class="absolute w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float transition-all duration-1000"
+      class="absolute w-64 h-64 bg-white/10 rounded-full blur-3xl will-change-transform"
       :style="{
-        top: isRegister ? '10%' : '20%',
-        left: isRegister ? '5%' : '20%',
-        transform: isRegister ? 'scale(1.2)' : 'scale(1)'
+        top: '20%',
+        left: isRegister ? '5%' : '15%',
+        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
       }"></div>
     <div 
-      class="absolute w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float-delayed transition-all duration-1000"
+      class="absolute w-80 h-80 bg-white/10 rounded-full blur-3xl will-change-transform"
       :style="{
-        bottom: isRegister ? '5%' : '20%',
-        right: isRegister ? '60%' : '20%',
-        transform: isRegister ? 'scale(0.8)' : 'scale(1)'
+        bottom: '15%',
+        right: isRegister ? '10%' : '15%',
+        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
       }"></div>
     <div 
-      class="absolute w-72 h-72 bg-white/10 rounded-full blur-3xl animate-float-slow transition-all duration-1000"
+      class="absolute w-72 h-72 bg-white/10 rounded-full blur-3xl will-change-transform"
       :style="{
         top: '50%',
-        left: isRegister ? '70%' : '50%',
-        transform: isRegister ? 'translate(-50%, -50%) scale(1.3)' : 'translate(-50%, -50%) scale(1)'
+        left: isRegister ? '75%' : '50%',
+        transform: 'translate(-50%, -50%)',
+        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
       }"></div>
 
     <!-- Main Card -->
     <div class="relative w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden">
-      <div class="grid grid-cols-1 md:grid-cols-2 relative">
+      <div class="grid grid-cols-1 md:grid-cols-2 relative min-h-[600px]">
         
-        <!-- Left Side - Form with slide animation -->
+        <!-- Form Container -->
         <div 
-          class="p-12 transition-all duration-700 ease-in-out"
-          :class="isRegister ? 'md:order-2 animate-slideInFromRight' : 'animate-slideInFromLeft'">
+          class="absolute inset-0 md:w-1/2 p-12 bg-white will-change-transform"
+          :style="{
+            transform: isRegister ? 'translateX(100%)' : 'translateX(0)',
+            transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+            zIndex: 2
+          }">
           
           <!-- Logo -->
           <div class="flex items-center space-x-3 mb-8">
@@ -45,7 +50,7 @@
           </div>
 
           <!-- Login Form -->
-          <div v-if="!isRegister" class="animate-fadeIn">
+          <div v-show="!isRegister" :key="'login'">
             <h2 class="text-3xl font-bold text-gray-900 mb-2">Sign In</h2>
             <p class="text-gray-600 mb-8">Masuk ke dashboard RW 05</p>
 
@@ -109,17 +114,17 @@
           </div>
 
           <!-- Register Form -->
-          <div v-else class="animate-fadeIn">
+          <div v-show="isRegister" :key="'register'">
             <h2 class="text-3xl font-bold text-gray-900 mb-2">Sign Up</h2>
-            <p class="text-gray-600 mb-8">Daftar sebagai warga RW 05</p>
+            <p class="text-gray-600 mb-6">Daftar sebagai warga RW 05</p>
 
-            <div class="space-y-5">
+            <div class="space-y-4">
               <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap</label>
                 <input 
                   v-model="formData.name"
                   type="text" 
-                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                  class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
                   placeholder="Nama Anda">
               </div>
 
@@ -128,7 +133,7 @@
                 <input 
                   v-model="formData.email"
                   type="email" 
-                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                  class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
                   placeholder="nama@email.com">
               </div>
 
@@ -137,7 +142,7 @@
                 <input 
                   v-model="formData.phone"
                   type="tel" 
-                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                  class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
                   placeholder="08123456789">
               </div>
 
@@ -147,7 +152,7 @@
                   <input 
                     v-model="formData.password"
                     :type="showPassword ? 'text' : 'password'"
-                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                    class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
                     placeholder="••••••••"
                     @keyup.enter="handleSubmit">
                   <button 
@@ -179,27 +184,21 @@
           </div>
         </div>
 
-        <!-- Right Side - Welcome Panel with slide animation -->
+        <!-- Welcome Panel -->
         <div 
-          class="bg-gradient-to-br from-green-500 to-green-700 p-12 flex flex-col justify-center items-center text-white relative overflow-hidden transition-all duration-700 ease-in-out"
-          :class="isRegister ? 'md:order-1 animate-slideInFromLeft' : 'animate-slideInFromRight'">
+          class="absolute inset-0 md:w-1/2 bg-gradient-to-br from-green-500 to-green-700 p-12 flex flex-col justify-center items-center text-white overflow-hidden will-change-transform"
+          :style="{
+            transform: isRegister ? 'translateX(0)' : 'translateX(100%)',
+            transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+            zIndex: 1
+          }">
           
-          <div class="absolute inset-0 opacity-10 transition-all duration-700"
-            :style="{
-              transform: isRegister ? 'scale(1.2) rotate(180deg)' : 'scale(1) rotate(0deg)'
-            }">
-            <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2 transition-all duration-700"
-              :style="{
-                transform: isRegister ? 'translate(80%, -80%) scale(1.5)' : 'translate(50%, -50%)'
-              }"></div>
-            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full translate-y-1/2 -translate-x-1/2 transition-all duration-700"
-              :style="{
-                transform: isRegister ? 'translate(-80%, 80%) scale(0.8)' : 'translate(-50%, 50%)'
-              }"></div>
+          <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full translate-y-1/2 -translate-x-1/2"></div>
           </div>
 
-          <div class="relative z-10 text-center transition-all duration-500"
-            :class="isRegister ? 'animate-fadeIn' : 'animate-fadeIn'">
+          <div class="relative z-10 text-center">
             <h2 class="text-4xl font-bold mb-4">{{ isRegister ? 'Join Us!' : 'RW 05.' }}</h2>
             <div class="w-20 h-1 bg-white mx-auto mb-6"></div>
             <h3 class="text-3xl font-bold mb-4">{{ isRegister ? 'Selamat Datang!' : 'Hello, Warga!' }}</h3>
@@ -278,93 +277,5 @@ const handleSubmit = () => {
 </script>
 
 <style scoped>
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px);
-  }
-  33% {
-    transform: translateY(-20px) translateX(20px);
-  }
-  66% {
-    transform: translateY(10px) translateX(-10px);
-  }
-}
-
-@keyframes float-delayed {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px);
-  }
-  33% {
-    transform: translateY(15px) translateX(-15px);
-  }
-  66% {
-    transform: translateY(-10px) translateX(10px);
-  }
-}
-
-@keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-30px) scale(1.1);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.animate-slideInFromLeft {
-  animation: slideInFromLeft 0.7s ease-out;
-}
-
-.animate-slideInFromRight {
-  animation: slideInFromRight 0.7s ease-out;
-}
-
-.animate-float {
-  animation: float 8s ease-in-out infinite;
-}
-
-.animate-float-delayed {
-  animation: float-delayed 10s ease-in-out infinite;
-}
-
-.animate-float-slow {
-  animation: float-slow 12s ease-in-out infinite;
-}
+/* Removed all keyframe animations to improve performance */
 </style>
