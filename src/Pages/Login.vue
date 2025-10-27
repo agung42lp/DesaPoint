@@ -1,17 +1,38 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-green-400 via-green-500 to-green-600 flex items-center justify-center p-4 relative overflow-hidden">
     
-    <!-- Decorative circles -->
-    <div class="absolute top-20 left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float"></div>
-    <div class="absolute bottom-20 right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float-delayed"></div>
-    <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-float-slow"></div>
+    <!-- Decorative circles with dynamic animation -->
+    <div 
+      class="absolute w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float transition-all duration-1000"
+      :style="{
+        top: isRegister ? '10%' : '20%',
+        left: isRegister ? '5%' : '20%',
+        transform: isRegister ? 'scale(1.2)' : 'scale(1)'
+      }"></div>
+    <div 
+      class="absolute w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float-delayed transition-all duration-1000"
+      :style="{
+        bottom: isRegister ? '5%' : '20%',
+        right: isRegister ? '60%' : '20%',
+        transform: isRegister ? 'scale(0.8)' : 'scale(1)'
+      }"></div>
+    <div 
+      class="absolute w-72 h-72 bg-white/10 rounded-full blur-3xl animate-float-slow transition-all duration-1000"
+      :style="{
+        top: '50%',
+        left: isRegister ? '70%' : '50%',
+        transform: isRegister ? 'translate(-50%, -50%) scale(1.3)' : 'translate(-50%, -50%) scale(1)'
+      }"></div>
 
     <!-- Main Card -->
-    <div class="relative w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden animate-fadeInUp">
-      <div class="grid grid-cols-1 md:grid-cols-2">
+    <div class="relative w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 relative">
         
-        <!-- Left Side - Form -->
-        <div class="p-12">
+        <!-- Left Side - Form with slide animation -->
+        <div 
+          class="p-12 transition-all duration-700 ease-in-out"
+          :class="isRegister ? 'md:order-2 animate-slideInFromRight' : 'animate-slideInFromLeft'">
+          
           <!-- Logo -->
           <div class="flex items-center space-x-3 mb-8">
             <div class="h-12 w-12 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold">
@@ -23,86 +44,169 @@
             </div>
           </div>
 
-          <h2 class="text-3xl font-bold text-gray-900 mb-2">Sign In</h2>
-          <p class="text-gray-600 mb-8">Masuk ke dashboard RW 05</p>
+          <!-- Login Form -->
+          <div v-if="!isRegister" class="animate-fadeIn">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Sign In</h2>
+            <p class="text-gray-600 mb-8">Masuk ke dashboard RW 05</p>
 
-          <div class="space-y-6">
-            <!-- Email -->
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-              <input 
-                v-model="formData.email"
-                type="email" 
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
-                placeholder="nama@email.com"
-                @keyup.enter="handleLogin">
-            </div>
-
-            <!-- Password -->
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
-              <div class="relative">
+            <div class="space-y-6">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
                 <input 
-                  v-model="formData.password"
-                  :type="showPassword ? 'text' : 'password'"
+                  v-model="formData.email"
+                  type="email" 
                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
-                  placeholder="••••••••"
-                  @keyup.enter="handleLogin">
-                <button 
-                  type="button"
-                  @click="showPassword = !showPassword"
-                  class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
-                  <svg v-if="!showPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                  </svg>
-                  <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-                  </svg>
-                </button>
+                  placeholder="nama@email.com"
+                  @keyup.enter="handleSubmit">
               </div>
-            </div>
 
-            <!-- Remember & Forgot -->
-            <div class="flex items-center justify-between">
-              <label class="flex items-center space-x-2 cursor-pointer">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                <div class="relative">
+                  <input 
+                    v-model="formData.password"
+                    :type="showPassword ? 'text' : 'password'"
+                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                    placeholder="••••••••"
+                    @keyup.enter="handleSubmit">
+                  <button 
+                    type="button"
+                    @click="showPassword = !showPassword"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                    <svg v-if="!showPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                    <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input 
+                    v-model="formData.remember"
+                    type="checkbox" 
+                    class="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                  <span class="text-sm text-gray-700">Remember me</span>
+                </label>
+                <a href="#" class="text-sm text-green-600 hover:text-green-700 font-medium">Forgot Password?</a>
+              </div>
+
+              <button 
+                @click="handleSubmit"
+                class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transform hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl">
+                LOGIN NOW
+              </button>
+
+              <p class="text-center text-sm text-gray-600">
+                Don't have an account? 
+                <button @click="handleToggle" class="text-green-600 hover:text-green-700 font-semibold">Register</button>
+              </p>
+            </div>
+          </div>
+
+          <!-- Register Form -->
+          <div v-else class="animate-fadeIn">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Sign Up</h2>
+            <p class="text-gray-600 mb-8">Daftar sebagai warga RW 05</p>
+
+            <div class="space-y-5">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap</label>
                 <input 
-                  v-model="formData.remember"
-                  type="checkbox" 
-                  class="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
-                <span class="text-sm text-gray-700">Remember me</span>
-              </label>
-              <a href="#" class="text-sm text-green-600 hover:text-green-700 font-medium">Forgot Password?</a>
+                  v-model="formData.name"
+                  type="text" 
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                  placeholder="Nama Anda">
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                <input 
+                  v-model="formData.email"
+                  type="email" 
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                  placeholder="nama@email.com">
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">No. Telepon</label>
+                <input 
+                  v-model="formData.phone"
+                  type="tel" 
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                  placeholder="08123456789">
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                <div class="relative">
+                  <input 
+                    v-model="formData.password"
+                    :type="showPassword ? 'text' : 'password'"
+                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                    placeholder="••••••••"
+                    @keyup.enter="handleSubmit">
+                  <button 
+                    type="button"
+                    @click="showPassword = !showPassword"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                    <svg v-if="!showPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                    <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <button 
+                @click="handleSubmit"
+                class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transform hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl">
+                REGISTER NOW
+              </button>
+
+              <p class="text-center text-sm text-gray-600">
+                Already have an account? 
+                <button @click="handleToggle" class="text-green-600 hover:text-green-700 font-semibold">Login</button>
+              </p>
             </div>
-
-            <!-- Submit Button -->
-            <button 
-              @click="handleLogin"
-              class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transform hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl">
-              LOGIN NOW
-            </button>
-
-            <!-- Register Link -->
-            <p class="text-center text-sm text-gray-600">
-              Don't have an account? 
-              <router-link to="/register" class="text-green-600 hover:text-green-700 font-semibold">Register</router-link>
-            </p>
           </div>
         </div>
 
-        <!-- Right Side - Welcome -->
-        <div class="bg-gradient-to-br from-green-500 to-green-700 p-12 flex flex-col justify-center items-center text-white relative overflow-hidden">
-          <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full translate-y-1/2 -translate-x-1/2"></div>
+        <!-- Right Side - Welcome Panel with slide animation -->
+        <div 
+          class="bg-gradient-to-br from-green-500 to-green-700 p-12 flex flex-col justify-center items-center text-white relative overflow-hidden transition-all duration-700 ease-in-out"
+          :class="isRegister ? 'md:order-1 animate-slideInFromLeft' : 'animate-slideInFromRight'">
+          
+          <div class="absolute inset-0 opacity-10 transition-all duration-700"
+            :style="{
+              transform: isRegister ? 'scale(1.2) rotate(180deg)' : 'scale(1) rotate(0deg)'
+            }">
+            <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2 transition-all duration-700"
+              :style="{
+                transform: isRegister ? 'translate(80%, -80%) scale(1.5)' : 'translate(50%, -50%)'
+              }"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full translate-y-1/2 -translate-x-1/2 transition-all duration-700"
+              :style="{
+                transform: isRegister ? 'translate(-80%, 80%) scale(0.8)' : 'translate(-50%, 50%)'
+              }"></div>
           </div>
 
-          <div class="relative z-10 text-center">
-            <h2 class="text-4xl font-bold mb-4">RW 05.</h2>
+          <div class="relative z-10 text-center transition-all duration-500"
+            :class="isRegister ? 'animate-fadeIn' : 'animate-fadeIn'">
+            <h2 class="text-4xl font-bold mb-4">{{ isRegister ? 'Join Us!' : 'RW 05.' }}</h2>
             <div class="w-20 h-1 bg-white mx-auto mb-6"></div>
-            <h3 class="text-3xl font-bold mb-4">Hello, Warga!</h3>
+            <h3 class="text-3xl font-bold mb-4">{{ isRegister ? 'Selamat Datang!' : 'Hello, Warga!' }}</h3>
             <p class="text-green-50 mb-8 max-w-sm">
-              Akses dashboard untuk mengelola data warga, keuangan, program, dan pengaduan RW 05 Si Doi
+              {{ isRegister 
+                ? 'Daftarkan diri Anda untuk bergabung dengan sistem informasi warga RW 05 Si Doi' 
+                : 'Akses dashboard untuk mengelola data warga, keuangan, program, dan pengaduan RW 05 Si Doi' }}
             </p>
 
             <!-- Social Icons -->
@@ -125,13 +229,13 @@
     </div>
 
     <!-- Back to Home -->
-    <router-link 
-    to="/"
-    class="fixed top-6 left-6 w-12 h-12 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl group z-50">
-    <svg class="w-6 h-6 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <a 
+      href="#"
+      class="fixed top-6 left-6 w-12 h-12 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl group z-50">
+      <svg class="w-6 h-6 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-    </svg>
-    </router-link>
+      </svg>
+    </a>
 
   </div>
 </template>
@@ -139,36 +243,71 @@
 <script setup>
 import { ref } from 'vue'
 
+const isRegister = ref(false)
+const showPassword = ref(false)
+
 const formData = ref({
   email: '',
   password: '',
+  name: '',
+  phone: '',
   remember: false
 })
 
-const showPassword = ref(false)
+const handleToggle = () => {
+  isRegister.value = !isRegister.value
+}
 
-const handleLogin = () => {
-  if (!formData.value.email || !formData.value.password) {
-    alert('Mohon isi email dan password')
-    return
+const handleSubmit = () => {
+  if (isRegister.value) {
+    if (!formData.value.name || !formData.value.email || !formData.value.password || !formData.value.phone) {
+      alert('Mohon isi semua field')
+      return
+    }
+    console.log('Register attempt:', formData.value)
+    alert('Register functionality - connect to backend')
+  } else {
+    if (!formData.value.email || !formData.value.password) {
+      alert('Mohon isi email dan password')
+      return
+    }
+    console.log('Login attempt:', formData.value)
+    alert('Login functionality - connect to backend')
   }
-  
-  console.log('Login attempt:', formData.value)
-  // Handle login logic here
-  // Redirect to dashboard after successful login
-  alert('Login functionality - connect to your backend')
 }
 </script>
 
 <style scoped>
-@keyframes fadeInUp {
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -205,8 +344,16 @@ const handleLogin = () => {
   }
 }
 
-.animate-fadeInUp {
-  animation: fadeInUp 0.8s ease-out;
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slideInFromLeft {
+  animation: slideInFromLeft 0.7s ease-out;
+}
+
+.animate-slideInFromRight {
+  animation: slideInFromRight 0.7s ease-out;
 }
 
 .animate-float {
