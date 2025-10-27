@@ -1,28 +1,30 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-green-400 via-green-500 to-green-600 flex items-center justify-center p-4 relative overflow-hidden">
     
-    <!-- Decorative circles - simplified animation -->
+    <!-- Decorative circles - with smooth movement -->
     <div 
-      class="absolute w-64 h-64 bg-white/10 rounded-full blur-3xl will-change-transform"
+      class="absolute w-64 h-64 bg-white/10 rounded-full blur-3xl transition-all duration-1000 ease-out"
       :style="{
-        top: '20%',
+        top: isRegister ? '10%' : '20%',
         left: isRegister ? '5%' : '15%',
-        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
+        transform: isRegister ? 'scale(1.2) rotate(45deg)' : 'scale(1) rotate(0deg)',
+        opacity: isRegister ? 0.8 : 1
       }"></div>
     <div 
-      class="absolute w-80 h-80 bg-white/10 rounded-full blur-3xl will-change-transform"
+      class="absolute w-80 h-80 bg-white/10 rounded-full blur-3xl transition-all duration-1000 ease-out"
       :style="{
-        bottom: '15%',
+        bottom: isRegister ? '5%' : '15%',
         right: isRegister ? '10%' : '15%',
-        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
+        transform: isRegister ? 'scale(0.9) rotate(-30deg)' : 'scale(1) rotate(0deg)',
+        opacity: isRegister ? 1 : 0.8
       }"></div>
     <div 
-      class="absolute w-72 h-72 bg-white/10 rounded-full blur-3xl will-change-transform"
+      class="absolute w-72 h-72 bg-white/10 rounded-full blur-3xl transition-all duration-1000 ease-out"
       :style="{
-        top: '50%',
-        left: isRegister ? '75%' : '50%',
-        transform: 'translate(-50%, -50%)',
-        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
+        top: isRegister ? '60%' : '50%',
+        left: isRegister ? '80%' : '50%',
+        transform: `translate(-50%, -50%) scale(${isRegister ? 1.3 : 1}) rotate(${isRegister ? 90 : 0}deg)`,
+        opacity: isRegister ? 0.9 : 1
       }"></div>
 
     <!-- Main Card -->
@@ -31,11 +33,12 @@
         
         <!-- Form Container -->
         <div 
-          class="absolute inset-0 md:w-1/2 p-12 bg-white will-change-transform"
+          class="absolute inset-0 md:w-1/2 p-12 bg-white transition-all duration-700 ease-out"
           :style="{
-            transform: isRegister ? 'translateX(100%)' : 'translateX(0)',
-            transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-            zIndex: 2
+            transform: isRegister ? 'translateX(100%) scale(0.95)' : 'translateX(0) scale(1)',
+            opacity: isRegister ? 0.3 : 1,
+            filter: isRegister ? 'blur(2px)' : 'blur(0px)',
+            zIndex: isRegister ? 1 : 2
           }">
           
           <!-- Logo -->
@@ -186,19 +189,33 @@
 
         <!-- Welcome Panel -->
         <div 
-          class="absolute inset-0 md:w-1/2 bg-gradient-to-br from-green-500 to-green-700 p-12 flex flex-col justify-center items-center text-white overflow-hidden will-change-transform"
+          class="absolute inset-0 md:w-1/2 bg-gradient-to-br from-green-500 to-green-700 p-12 flex flex-col justify-center items-center text-white overflow-hidden transition-all duration-700 ease-out"
           :style="{
-            transform: isRegister ? 'translateX(0)' : 'translateX(100%)',
-            transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-            zIndex: 1
+            transform: isRegister ? 'translateX(0) scale(1)' : 'translateX(100%) scale(0.95)',
+            opacity: isRegister ? 1 : 0.3,
+            filter: isRegister ? 'blur(0px)' : 'blur(2px)',
+            zIndex: isRegister ? 2 : 1
           }">
           
           <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full translate-y-1/2 -translate-x-1/2"></div>
+            <div 
+              class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full transition-all duration-1000 ease-out"
+              :style="{
+                transform: isRegister ? 'translate(25%, -25%) scale(1.2) rotate(180deg)' : 'translate(50%, -50%) scale(1) rotate(0deg)'
+              }"></div>
+            <div 
+              class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full transition-all duration-1000 ease-out"
+              :style="{
+                transform: isRegister ? 'translate(-30%, 30%) scale(1.3) rotate(-180deg)' : 'translate(-50%, 50%) scale(1) rotate(0deg)'
+              }"></div>
           </div>
 
-          <div class="relative z-10 text-center">
+          <div 
+            class="relative z-10 text-center transition-all duration-500 ease-out"
+            :style="{
+              transform: isRegister ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
+              opacity: isRegister ? 1 : 0
+            }">
             <h2 class="text-4xl font-bold mb-4">{{ isRegister ? 'Join Us!' : 'RW 05.' }}</h2>
             <div class="w-20 h-1 bg-white mx-auto mb-6"></div>
             <h3 class="text-3xl font-bold mb-4">{{ isRegister ? 'Selamat Datang!' : 'Hello, Warga!' }}</h3>
@@ -275,7 +292,3 @@ const handleSubmit = () => {
   }
 }
 </script>
-
-<style scoped>
-/* Removed all keyframe animations to improve performance */
-</style>
