@@ -9,12 +9,11 @@
               RW
             </div>
             <div>
-              <h1 class="text-lg md:text-xl font-bold text-green-700">RW 05 Si Doi</h1>
-              <p class="text-xs text-gray-600">Kelurahan Sejahtera</p>
+              <h1 class="text-lg md:text-xl font-bold text-green-700">DesaPoint</h1>
+              <p class="text-xs text-gray-600">RW Sejahtera</p>
             </div>
           </div>
           
-          <!-- Desktop Menu -->
           <div class="hidden md:flex items-center space-x-6">
             <router-link to="/" class="text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-green-600 after:scale-x-100 transition-all">Beranda</router-link>
             <router-link to="/program" class="text-gray-700 hover:text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-600 hover:after:w-full after:transition-all">Program</router-link>
@@ -25,7 +24,6 @@
             </router-link>
           </div>
 
-          <!-- Mobile Menu Button -->
           <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2">
             <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -34,7 +32,6 @@
           </button>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
         <div v-if="mobileMenuOpen" class="md:hidden pb-4 border-t border-gray-100 mt-2">
           <div class="flex flex-col space-y-3 pt-4">
             <router-link @click="mobileMenuOpen = false" to="/" class="text-green-600 font-medium py-2">Beranda</router-link>
@@ -74,7 +71,6 @@
     <!-- Bagian stat ya guys-->
     <section class="max-w-7xl mx-auto px-4 -mt-12 md:-mt-16 mb-8 scroll-animate">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
-        <!-- Stat card pertama dengan donut ya guys-->
         <div 
           class="bg-white rounded-xl md:rounded-2xl shadow-xl p-4 md:p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp relative overflow-hidden group"
           style="animation-delay: 0s"
@@ -88,16 +84,12 @@
               {{ stats[0].label }}
             </p>
             
-            <!-- Container untuk donut dan legend -->
             <div class="flex items-center justify-between gap-3 md:gap-4">
-              <!-- Donut -->
               <div class="relative w-20 h-20 md:w-24 md:h-24 flex-shrink-0 transform transition-all duration-500" 
                   :class="{ 'scale-125': stats[0].hover }">
                 <svg class="w-20 h-20 md:w-24 md:h-24 transform -rotate-90" viewBox="0 0 100 100">
-                  <!-- Lingkaran bg -->
                   <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="12"/>
                   
-                  <!-- Bagian female -->
                   <circle 
                     cx="50" 
                     cy="50" 
@@ -111,7 +103,6 @@
                     class="transition-all duration-1000 ease-out"
                     :class="{ 'stroke-[14]': stats[0].hover }"/>
                   
-                  <!-- Bagian male -->
                   <circle 
                     cx="50" 
                     cy="50" 
@@ -126,7 +117,6 @@
                     :class="{ 'stroke-[14]': stats[0].hover }"/>
                 </svg>
                 
-                <!-- Angka di tengah -->
                 <div class="absolute inset-0 flex items-center justify-center">
                   <span class="text-xl md:text-2xl font-bold text-green-700 transition-all duration-300" 
                         :class="{ 'scale-110': stats[0].hover }">
@@ -136,7 +126,6 @@
                 </div>
               </div>
               
-              <!-- Legend -->
               <div class="space-y-1.5 md:space-y-2 flex-1">
                 <div class="flex items-center gap-2 transform transition-all duration-300" 
                     :class="{ 'translate-x-1': stats[0].hover }">
@@ -508,7 +497,6 @@
       <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8 text-center animate-fadeInUp">Program Kebersihan</h2>
       
       <div class="relative">
-        <!-- Navigation Arrows -->
         <button 
           @click="prevCleaningSlide"
           :disabled="currentCleaningSlide === 0"
@@ -518,7 +506,6 @@
           </svg>
         </button>
 
-        <!-- Card Container -->
         <div class="overflow-hidden rounded-2xl shadow-xl">
           <div 
             class="flex transition-transform duration-500 ease-out"
@@ -529,7 +516,6 @@
               :key="index"
               class="min-w-full">
               
-              <!-- Foto -->
               <div class="relative h-48 md:h-64 overflow-hidden">
                 <img 
                   :src="event.image" 
@@ -537,13 +523,11 @@
                   class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/30"></div>
                 
-                <!-- Label -->
                 <div class="absolute top-4 left-4">
                   <span class="text-white/90 text-sm font-medium">{{ event.label }}</span>
                 </div>
               </div>
 
-              <!-- Info Card -->
               <div class="bg-white p-4 md:p-6">
                 <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                   <div class="flex-1">
@@ -563,7 +547,6 @@
                     </div>
                   </div>
 
-                  <!-- Status Badge -->
                   <div class="flex md:ml-6 justify-end md:justify-start">
                     <div 
                       v-if="event.status === 'thisweek'"
@@ -611,7 +594,6 @@
           </svg>
         </button>
 
-        <!-- Dots Indicator -->
         <div class="flex justify-center gap-2 mt-6">
           <button 
             v-for="(event, idx) in sortedEvents" 
@@ -742,15 +724,15 @@
       </section>
 
       <!-- Bagian tabel jadwal ronda ya guys-->
-      <section class="max-w-5xl mx-auto px-4 mt-12 mb-16 scroll-animate">
+      <section class="max-w-5xl mx-auto px-4 mt-8 md:mt-12 mb-12 md:mb-16 scroll-animate">
         <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-fadeInUp">Jadwal Ronda</h2>
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
+        <div class="bg-white rounded-xl md-rounded-2xl shadow-xl overflow-hidden">
+          <div class="bg-gradient-to-r from-green-600 to-green-700 px-4 md:px-8 py-4 md:py-6">
             <h2 class="text-2xl font-bold text-white">Jadwal Ronda </h2>
             <p class="text-green-100 mt-1">Data jadwal ronda Warga</p>
           </div>
 
-          <div class="overflow-x-auto">
+          <div class=" hidden md:block overflow-x-auto">
             <table class="w-full">
               <thead>
                 <tr class="bg-gray-50 border-b-2 border-green-200">
@@ -789,6 +771,30 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          <div class="md:hidden divide-y divide-gray-100">
+            <div 
+              v-for="(item, index) in tableData3" 
+              :key="index"
+              class="p-4 hover:bg-green-50 transition-all duration-300"
+              :class="{ 'animate-fadeInUp': true }"
+              :style="{ animationDelay: `${index * 0.1}s` }">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                  <span class="text-green-700 font-semibold text-sm">{{ item.nama.charAt(0) }}</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-gray-900 mb-1">{{ item.nama }}</div>
+                  <div class="flex items-center gap-1 text-xs text-blue-700 mb-2">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    {{ item.totalSampah }}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="bg-gray-50 px-8 py-4 border-t border-gray-200">
