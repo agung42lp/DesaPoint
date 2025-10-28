@@ -1077,7 +1077,7 @@ const tableData3 = ref([
     no: 2,
     nama: 'Siti Nurhaliza',
     totalSampah: '38 Kg',
-    totalUang: 'Rp 190.000'
+    totalUang: 'Supri Supriyadi, Ahmad Mubarok, Supriyanto'
   },
   {
     no: 3,
