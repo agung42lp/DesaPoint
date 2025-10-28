@@ -428,7 +428,6 @@
           <p class="text-green-100 mt-1 text-sm">Data penerima bantuan terbaru</p>
         </div>
 
-        <!-- Desktop Table -->
         <div class="hidden md:block overflow-x-auto">
           <table class="w-full">
             <thead>
@@ -473,7 +472,6 @@
           </table>
         </div>
 
-        <!-- Mobile Cards -->
         <div class="md:hidden divide-y divide-gray-100">
           <div 
             v-for="(item, index) in tableData" 
@@ -657,14 +655,14 @@
     </section>
 
      <!-- Bagian tabel bank sampah ya guys-->
-      <section class="max-w-5xl mx-auto px-4 mt-12 mb-16 scroll-animate">
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div class="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
+      <section class="max-w-5xl mx-auto px-4 mt-8 md:mt-12 mb-12 md:mb-16 scroll-animate">
+        <div class="bg-white rounded-xl md:rounded-2xl shadow-xl overflow-hidden">
+          <div class="bg-gradient-to-r from-green-600 to-green-700 px-4 md:px-8 py-4 md:py-6">
             <h2 class="text-2xl font-bold text-white">Rekening Bank Sampah</h2>
             <p class="text-green-100 mt-1">Data rekening bank sampah warga</p>
           </div>
 
-          <div class="overflow-x-auto">
+          <div class="hidden md:block overflow-x-auto">
             <table class="w-full">
               <thead>
                 <tr class="bg-gray-50 border-b-2 border-green-200">
@@ -710,6 +708,31 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          <div class="md:hidden divide-y divide-gray-100">
+            <div 
+              v-for="(item, index) in tableData2" 
+              :key="index"
+              class="p-4 hover:bg-green-50 transition-all duration-300"
+              :class="{ 'animate-fadeInUp': true }"
+              :style="{ animationDelay: `${index * 0.1}s` }">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                  <span class="text-green-700 font-semibold text-sm">{{ item.nama.charAt(0) }}</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-gray-900 mb-1">{{ item.nama }}</div>
+                  <div class="flex items-center gap-1 text-xs text-blue-700 mb-2">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    {{ item.tanggal }}
+                  </div>
+                  <div class="text-sm text-gray-600">{{ item.keterangan }}</div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="bg-gray-50 px-8 py-4 border-t border-gray-200">
