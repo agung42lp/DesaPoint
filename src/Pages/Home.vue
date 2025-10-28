@@ -70,9 +70,9 @@
 
     <!-- Bagian stat ya guys-->
     <section class="max-w-7xl mx-auto px-4 -mt-12 md:-mt-16 mb-8 scroll-animate">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
         <div 
-          class="bg-white rounded-xl md:rounded-2xl shadow-xl p-4 md:p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp relative overflow-hidden group"
+          class="bg-white rounded-xl md:rounded-2xl shadow-xl p-3 md:p-6 hover:shadow-2xl transform transition-all duration-500 cursor-pointer animate-fadeInUp relative overflow-hidden group"
           style="animation-delay: 0s"
           @mouseenter="stats[0].hover = true"
           @mouseleave="stats[0].hover = false">
@@ -500,7 +500,7 @@
         <button 
           @click="prevCleaningSlide"
           :disabled="currentCleaningSlide === 0"
-          class="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
+          class="absolute -left-16 md:-left-18 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed z-10">
           <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
@@ -803,6 +803,158 @@
         </div>
       </section>
 
+      <!-- Bagian laporan keuangan ya guys -->
+      <section class="max-w-7xl mx-auto px-4 mt-8 md:mt-16 mb-12 md:mb-16 scroll-animate">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8 text-center animate-fadeInUp">Laporan Keuangan</h2>
+        
+        <!-- Cards Container -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          
+          <!-- Card Pemasukan -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <p class="text-gray-600 text-sm md:text-base mb-2">Total Pemasukan</p>
+                <h3 class="text-3xl md:text-4xl font-bold text-green-700">
+                  <span v-if="animateKeuangan">{{ formatNumber(animatedKeuangan.pemasukan) }}</span>
+                  <span v-else>0</span>
+                </h3>
+                <a href="/keuangan" class="inline-flex items-center text-green-600 text-sm font-medium mt-3 hover:text-green-700 group">
+                  <span>Selengkapnya</span>
+                  <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="p-4 bg-green-100 rounded-xl">
+                <svg class="w-8 h-8 md:w-10 md:h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Mini Stats Grid -->
+            <div class="grid grid-cols-2 gap-3 md:gap-4">
+              <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-3 md:p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-2 h-2 rounded-full bg-green-600"></div>
+                  <p class="text-xs md:text-sm text-gray-600">Iuran</p>
+                </div>
+                <p class="text-lg md:text-xl font-bold text-green-700">
+                  <span v-if="animateKeuangan">{{ animatedKeuangan.iuran }}</span>
+                  <span v-else>0</span>
+                </p>
+              </div>
+              
+              <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-3 md:p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-2 h-2 rounded-full bg-blue-600"></div>
+                  <p class="text-xs md:text-sm text-gray-600">Perumahan</p>
+                </div>
+                <p class="text-lg md:text-xl font-bold text-blue-700">
+                  <span v-if="animateKeuangan">{{ animatedKeuangan.perumahan }}</span>
+                  <span v-else>0</span>
+                </p>
+              </div>
+              
+              <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-3 md:p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-2 h-2 rounded-full bg-purple-600"></div>
+                  <p class="text-xs md:text-sm text-gray-600">Donasi</p>
+                </div>
+                <p class="text-lg md:text-xl font-bold text-purple-700">
+                  <span v-if="animateKeuangan">{{ animatedKeuangan.donasi }}</span>
+                  <span v-else>0</span>
+                </p>
+              </div>
+              
+              <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-xl p-3 md:p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-2 h-2 rounded-full bg-emerald-600"></div>
+                  <p class="text-xs md:text-sm text-gray-600">Bank Sampah</p>
+                </div>
+                <p class="text-lg md:text-xl font-bold text-emerald-700">
+                  <span v-if="animateKeuangan">{{ animatedKeuangan.bankSampah }}</span>
+                  <span v-else>0</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Pengeluaran -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <p class="text-gray-600 text-sm md:text-base mb-2">Total Pengeluaran</p>
+                <h3 class="text-3xl md:text-4xl font-bold text-red-700">
+                  <span v-if="animateKeuangan">{{ formatNumber(animatedKeuangan.pengeluaran) }}</span>
+                  <span v-else>0</span>
+                </h3>
+                <a href="/keuangan" class="inline-flex items-center text-red-600 text-sm font-medium mt-3 hover:text-red-700 group">
+                  <span>Selengkapnya</span>
+                  <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="p-4 bg-red-100 rounded-xl">
+                <svg class="w-8 h-8 md:w-10 md:h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Mini Stats Grid -->
+            <div class="grid grid-cols-2 gap-3 md:gap-4">
+              <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-3 md:p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-2 h-2 rounded-full bg-red-600"></div>
+                  <p class="text-xs md:text-sm text-gray-600">Program Bakti Sosial</p>
+                </div>
+                <p class="text-lg md:text-xl font-bold text-red-700">
+                  <span v-if="animateKeuangan">{{ animatedKeuangan.baksos }}</span>
+                  <span v-else>0</span>
+                </p>
+              </div>
+              
+              <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-3 md:p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-2 h-2 rounded-full bg-orange-600"></div>
+                  <p class="text-xs md:text-sm text-gray-600">Program Kerja Bakti</p>
+                </div>
+                <p class="text-lg md:text-xl font-bold text-orange-700">
+                  <span v-if="animateKeuangan">{{ animatedKeuangan.kerjaBakti }}</span>
+                  <span v-else>0</span>
+                </p>
+              </div>
+              
+              <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-3 md:p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-2 h-2 rounded-full bg-yellow-600"></div>
+                  <p class="text-xs md:text-sm text-gray-600">Program Bank Sampah</p>
+                </div>
+                <p class="text-lg md:text-xl font-bold text-yellow-700">
+                  <span v-if="animateKeuangan">{{ animatedKeuangan.bankSampahOut }}</span>
+                  <span v-else>0</span>
+                </p>
+              </div>
+              
+              <div class="bg-gradient-to-br from-rose-50 to-rose-100 rounded-xl p-3 md:p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-2 h-2 rounded-full bg-rose-600"></div>
+                  <p class="text-xs md:text-sm text-gray-600">Dan Lain Lain</p>
+                </div>
+                <p class="text-lg md:text-xl font-bold text-rose-700">
+                  <span v-if="animateKeuangan">{{ animatedKeuangan.lainLain }}</span>
+                  <span v-else>0</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
     <!-- Bagian footer ya guys -->
     <footer class="bg-gray-900 text-white py-12 relative overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 via-green-600 to-green-400 animate-wave"></div>
@@ -868,6 +1020,37 @@ const animatedValues3 = ref([0, 0, 0, 0])
 const animateChart = ref(false)
 const chartMalePercentage = ref(0)
 const chartFemalePercentage = ref(0)
+const animateKeuangan = ref(false)
+
+const animatedKeuangan = ref({
+  pemasukan: 0,
+  pengeluaran: 0,
+  iuran: 0,
+  perumahan: 0,
+  donasi: 0,
+  bankSampah: 0,
+  baksos: 0,
+  kerjaBakti: 0,
+  bankSampahOut: 0,
+  lainLain: 0
+})
+
+const keuanganData = {
+  pemasukan: 1234567,
+  pengeluaran: 1234567,
+  iuran: 2543,
+  perumahan: 12,
+  donasi: 8,
+  bankSampah: 156,
+  baksos: 2543,
+  kerjaBakti: 12,
+  bankSampahOut: 8,
+  lainLain: 156
+}
+
+const formatNumber = (num) => {
+  return new Intl.NumberFormat('id-ID').format(num)
+}
 
 const setupScrollAnimations = () => {
   const options = {
@@ -1187,6 +1370,8 @@ onMounted(() => {
     animateNumbers2.value = true
     animateNumbers3.value = true
     animateChart.value = true
+    animateKeuangan.value = true
+    
     setTimeout(() => {
       scrollObserver = setupScrollAnimations()
     }, 100)
@@ -1246,10 +1431,25 @@ onMounted(() => {
       const timer = setInterval(() => {
         current += increment
         if (current >= stat.value) {
-          animatedValues2.value[idx] = stat.value
+          animatedValues3.value[idx] = stat.value
           clearInterval(timer)
         } else {
-          animatedValues2.value[idx] = Math.floor(current)
+          animatedValues3.value[idx] = Math.floor(current)
+        }
+      }, 30)
+    })
+
+    Object.keys(keuanganData).forEach(key => {
+      let current = 0
+      const target = keuanganData[key]
+      const increment = target / 50
+      const timer = setInterval(() => {
+        current += increment
+        if (current >= target) {
+          animatedKeuangan.value[key] = target
+          clearInterval(timer)
+        } else {
+          animatedKeuangan.value[key] = Math.floor(current)
         }
       }, 30)
     })
