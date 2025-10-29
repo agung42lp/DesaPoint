@@ -16,8 +16,8 @@
           
           <div class="hidden md:flex items-center space-x-6">
             <router-link to="/" class="text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-green-600 after:scale-x-100 transition-all">Beranda</router-link>
-            <router-link to="/program" class="text-gray-700 hover:text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-600 hover:after:w-full after:transition-all">Program</router-link>
-            <router-link to="/keuangan" class="text-gray-700 hover:text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-600 hover:after:w-full after:transition-all">Keuangan</router-link>
+            <a href="#baksos" class="text-gray-700 hover:text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-600 hover:after:w-full after:transition-all">Program</a>
+            <a href="#keuangan" class="text-gray-700 hover:text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-600 hover:after:w-full after:transition-all">Keuangan</a>
             <router-link to="/form" class="text-gray-700 hover:text-green-600 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-600 hover:after:w-full after:transition-all">Pengaduan</router-link>
             <router-link to="/login" class="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg">
               Login
@@ -35,8 +35,8 @@
         <div v-if="mobileMenuOpen" class="md:hidden pb-4 border-t border-gray-100 mt-2">
           <div class="flex flex-col space-y-3 pt-4">
             <router-link @click="mobileMenuOpen = false" to="/" class="text-green-600 font-medium py-2">Beranda</router-link>
-            <router-link @click="mobileMenuOpen = false" to="/program" class="text-gray-700 hover:text-green-600 font-medium py-2">Program</router-link>
-            <router-link @click="mobileMenuOpen = false" to="/keuangan" class="text-gray-700 hover:text-green-600 font-medium py-2">Keuangan</router-link>
+            <a @click="mobileMenuOpen = false" href="#baksos" class="text-gray-700 hover:text-green-600 font-medium py-2">Program</a>
+            <a @click="mobileMenuOpen = false" href="#keuangan" class="text-gray-700 hover:text-green-600 font-medium py-2">Keuangan</a>
             <router-link @click="mobileMenuOpen = false" to="/form" class="text-gray-700 hover:text-green-600 font-medium py-2">Pengaduan</router-link>
             <router-link @click="mobileMenuOpen = false" to="/login" class="px-4 py-2 bg-green-600 text-white rounded-lg font-medium text-center">Login</router-link>
           </div>
@@ -380,7 +380,7 @@
     </section>
 
     <!-- Bagian stat baksos guys -->
-    <section class="max-w-5xl mx-auto px-4 mt-8 md:mt-16 scroll-animate">
+    <section id="baksos" class="max-w-5xl mx-auto px-4 mt-8 md:mt-16 scroll-animate">
       <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8 text-center animate-fadeInUp">Program Bakti Sosial</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         <div 
@@ -804,18 +804,19 @@
       </section>
 
       <!-- Bagian laporan keuangan ya guys -->
-      <section class="max-w-7xl mx-auto px-4 mt-8 md:mt-16 mb-12 md:mb-16 scroll-animate">
+      <section id="keuangan" class="max-w-7xl mx-auto px-4 mt-8 md:mt-16 mb-12 md:mb-16 scroll-animate">
         <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8 text-center animate-fadeInUp">Laporan Keuangan</h2>
         
-        <!-- Cards Container -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           
-          <!-- Card Pemasukan -->
-          <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500">
+          <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500"
+            @mouseenter="animatedKeuangan.hoverPemasukan = true"
+            @mouseleave="animatedKeuangan.hoverPemasukan = false">
             <div class="flex items-start justify-between mb-6">
               <div>
                 <p class="text-gray-600 text-sm md:text-base mb-2">Total Pemasukan</p>
-                <h3 class="text-3xl md:text-4xl font-bold text-green-700">
+                <h3 class="text-3xl md:text-4xl font-bold text-green-700 transition-all duration-300"
+                  :class="{ 'scale-110': animatedKeuangan.hoverPemasukan }">
                   <span v-if="animateKeuangan">{{ formatNumber(animatedKeuangan.pemasukan) }}</span>
                   <span v-else>0</span>
                 </h3>
@@ -826,14 +827,16 @@
                   </svg>
                 </a>
               </div>
-              <div class="p-4 bg-green-100 rounded-xl">
-                <svg class="w-8 h-8 md:w-10 md:h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="p-4 bg-green-100 rounded-xl transition-all duration-300"
+                  :class="{ 'bg-green-600 scale-110 rotate-12': animatedKeuangan.hoverPemasukan }">
+                <svg class="w-8 h-8 md:w-10 md:h-10 transition-colors"
+                    :class="animatedKeuangan.hoverPemasukan ? 'text-white' : 'text-green-600'"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
                 </svg>
               </div>
             </div>
             
-            <!-- Mini Stats Grid -->
             <div class="grid grid-cols-2 gap-3 md:gap-4">
               <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-3 md:p-4">
                 <div class="flex items-center gap-2 mb-2">
@@ -881,12 +884,14 @@
             </div>
           </div>
 
-          <!-- Card Pengeluaran -->
-          <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500">
+          <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500"
+            @mouseenter="animatedKeuangan.hoverPengeluaran = true"
+            @mouseleave="animatedKeuangan.hoverPengeluaran = false">
             <div class="flex items-start justify-between mb-6">
               <div>
                 <p class="text-gray-600 text-sm md:text-base mb-2">Total Pengeluaran</p>
-                <h3 class="text-3xl md:text-4xl font-bold text-red-700">
+                <h3 class="text-3xl md:text-4xl font-bold text-red-700 transition-all duration-300"
+                  :class="{ 'scale-110': animatedKeuangan.hoverPengeluaran }">
                   <span v-if="animateKeuangan">{{ formatNumber(animatedKeuangan.pengeluaran) }}</span>
                   <span v-else>0</span>
                 </h3>
@@ -897,14 +902,16 @@
                   </svg>
                 </a>
               </div>
-              <div class="p-4 bg-red-100 rounded-xl">
-                <svg class="w-8 h-8 md:w-10 md:h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="p-4 bg-red-100 rounded-xl transition-all duration-300"
+                  :class="{ 'bg-red-600 scale-110 rotate-12': animatedKeuangan.hoverPengeluaran }">
+                <svg class="w-8 h-8 md:w-10 md:h-10 transition-colors"
+                    :class="animatedKeuangan.hoverPengeluaran ? 'text-white' : 'text-red-600'"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
                 </svg>
               </div>
             </div>
             
-            <!-- Mini Stats Grid -->
             <div class="grid grid-cols-2 gap-3 md:gap-4">
               <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-3 md:p-4">
                 <div class="flex items-center gap-2 mb-2">
@@ -1032,7 +1039,9 @@ const animatedKeuangan = ref({
   baksos: 0,
   kerjaBakti: 0,
   bankSampahOut: 0,
-  lainLain: 0
+  lainLain: 0,
+  hoverPemasukan: false,
+  hoverPengeluaran: false
 })
 
 const keuanganData = {
@@ -1641,5 +1650,14 @@ section.scroll-animate > div {
 
 .scroll-animate.animate-visible svg circle {
   animation: chartPulse 0.5s ease-out;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#baksos,
+#keuangan {
+  scroll-margin-top: 6rem;
 }
 </style>
